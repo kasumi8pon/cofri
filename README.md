@@ -1,24 +1,10 @@
-# README
+# coFri
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+coFri（コフリ）というサービスは、
+食材を無駄にしてしまう問題を解決したい、
+複数人が料理をする家庭向けの、
+冷蔵庫の中身を管理できるサービスです。
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+ユーザーは冷蔵庫の中にある食材の情報を家族で共有することができ、
+紙のノートによる管理と違って、
+アプリから家族に買い物を依頼できることが特徴です。
