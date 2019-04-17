@@ -1,0 +1,14 @@
+h1 食材詳細
+
+= link_to "食材一覧に戻る", foods_path, class: "nav-link"
+
+table.table
+  tr
+    th= Food.human_attribute_name(:name)
+    td= @food.name
+  tr
+    th= Food.human_attribute_name(:amount)
+    td= @food.amount
+
+= link_to "編集", edit_food_path(@food), class: "btn"
+= link_to "削除", @food, method: :delete, data: { confirm: "#{@food.name}を削除します。よろしいですか？" }, class: "btn"

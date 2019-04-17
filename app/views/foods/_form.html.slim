@@ -1,0 +1,13 @@
+= form_with model: @food, local: true do |f|
+  .form-group
+    = f.label :name
+    = f.text_field :name, class: "form-control"
+  .form-group
+    = f.label :amount
+    = f.radio_button :amount, :empty, checked: "checked", class: "form-control"
+    = f.label :empty
+    = f.radio_button :amount, :short, class: "form-control"
+    = f.label :short
+    = f.radio_button :amount, :enough, class: "form-control"
+    = f.label :enough
+  = f.submit nil, class: "btn"
