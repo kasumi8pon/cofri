@@ -8,10 +8,13 @@ ja:
           has_many: "%{record}が存在しているので削除できません"
     models:
       food: 食べ物
+      food_category: カテゴリー
     attributes:
       food:
         name: 名称
         amount: 量
+      food_category:
+        name: 名称
   date:
     abbr_day_names:
     - 日
