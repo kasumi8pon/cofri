@@ -10,4 +10,7 @@
     = f.label :short
     = f.radio_button :amount, :enough, class: "form-control"
     = f.label :enough
+  .form_group
+    = f.label :food_category
+    = f.collection_select :food_category, FoodCategory.all, :id, :name, prompt: true
   = f.submit nil, class: "btn"

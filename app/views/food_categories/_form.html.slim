@@ -1,0 +1,5 @@
+= form_with model: @food_category, local: true do |f|
+  .form-group
+    = f.label :name
+    = f.text_field :name, class: "form-control"
+  = f.submit nil, class: "btn"

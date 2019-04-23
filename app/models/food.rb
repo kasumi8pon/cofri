@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Food < ApplicationRecord
+  belongs_to :food_category
   validates :name, presence: true
   validates :amount, presence: true
 
