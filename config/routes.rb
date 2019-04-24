@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   root to: "foods#index"
   resources :foods
   resources :food_categories, except: :show
+  resources :users, except: :index
 end
