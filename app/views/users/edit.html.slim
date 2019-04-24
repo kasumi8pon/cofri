@@ -1,0 +1,5 @@
+h1 ユーザー情報編集
+= link_to "食材一覧画面に戻る", foods_path, class: "nav-link"
+= render partial: "form", locals: { user: @user }
+= link_to "ユーザー削除", @user, method: :delete, data: { confirm: "#{@user.name}を削除します。よろしいですか？" }
+
