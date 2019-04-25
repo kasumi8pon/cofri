@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2019_04_23_060304) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "food_category_id"
+    t.index ["food_category_id"], name: "index_foods_on_food_category_id"
   end
 
   create_table "users", force: :cascade do |t|
