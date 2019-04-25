@@ -15,6 +15,7 @@ html
         li= link_to "ログアウト", logout_path, method: :delete, class: "nav-link"
       - else
         li= link_to "ログイン", login_path, class: "nav-link"
+        li= link_to "ユーザー登録", new_user_path, class: "nav-link"
     - if flash.notice.present?
       = flash.notice
     = yield
