@@ -8,6 +8,13 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
+    ul
+      - if current_user
+        li= link_to "冷蔵庫のなかみ", foods_path, class: "nav-link"
+        li= link_to "ユーザー情報", edit_user_path(current_user), class: "nav-link"
+        li= link_to "ログアウト", logout_path, method: :delete, class: "nav-link"
+      - else
+        li= link_to "ログイン", login_path, class: "nav-link"
     - if flash.notice.present?
       = flash.notice
     = yield
