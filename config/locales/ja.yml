@@ -14,7 +14,7 @@ ja:
       food:
         name: 名称
         amount: 量
-        food_category: カテゴリー
+        food_category_id: カテゴリー
       food_category:
         name: 名称
       user:
