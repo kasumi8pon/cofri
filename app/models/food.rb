@@ -2,6 +2,7 @@
 
 class Food < ApplicationRecord
   belongs_to :food_category
+  belongs_to :user_group
   validates :name, presence: true
   validates :amount, presence: true
 

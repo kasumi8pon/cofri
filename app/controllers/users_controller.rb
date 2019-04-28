@@ -8,7 +8,8 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.new(user_params)
+    group = UserGroup.create
+    user = group.users.create(user_params)
     if user.save
       redirect_to foods_url, notice: "#{user.name}としてユーザー登録しました"
     else
