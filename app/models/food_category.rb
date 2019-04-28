@@ -2,5 +2,6 @@
 
 class FoodCategory < ApplicationRecord
   has_many :foods
+  belongs_to :user_group
   validates :name, presence: true
 end
