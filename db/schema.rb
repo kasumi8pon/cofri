@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_25_170523) do
+ActiveRecord::Schema.define(version: 2019_04_29_065209) do
   create_table "food_categories", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -30,6 +30,15 @@ ActiveRecord::Schema.define(version: 2019_04_25_170523) do
     t.integer "user_group_id"
     t.index ["food_category_id"], name: "index_foods_on_food_category_id"
     t.index ["user_group_id"], name: "index_foods_on_user_group_id"
+  end
+
+  create_table "invitations", force: :cascade do |t|
+    t.string "invitation_digest"
+    t.boolean "sign_up", default: false
+    t.integer "user_group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_group_id"], name: "index_invitations_on_user_group_id"
   end
 
   create_table "user_groups", force: :cascade do |t|

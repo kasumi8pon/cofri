@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   resources :foods
   resources :food_categories, except: :show
   resources :users, except: :index
+  resources :invitations, only: [:create, :edit, :update, :show]
 end
