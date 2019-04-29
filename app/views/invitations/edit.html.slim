@@ -1,0 +1,17 @@
+h1 ユーザー登録
+= form_with model: @user, url: invitation_path(@invitation), html: {method: "patch"}, local: true do |f|
+  .form-group
+    = f.label :name
+    = f.text_field :name, class: "form-control"
+  .form-group
+    = f.label :email
+    = f.email_field :email, class: "form-control"
+  .form-group
+    = f.label :password
+    = f.password_field :password, class: "form-control"
+  .form-group
+    = f.label :password_confirmation
+    = f.password_field :password_confirmation, class: "form-control"
+  = hidden_field_tag :invitation_id, @invitation.id
+  = f.submit nil, class: "btn"
+

@@ -1,0 +1,3 @@
+h1 招待アドレス
+= label_tag :url, "URL"
+= text_field_tag :url, edit_invitation_url(@invitation.id, token: @invitation.invitation_token)
