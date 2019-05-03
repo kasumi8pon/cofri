@@ -10,4 +10,8 @@ Rails.application.routes.draw do
   resources :food_categories, except: :show
   resources :users, except: :index
   resources :invitations, only: [:create, :edit, :update, :show]
+
+  namespace "api" do
+    resources :foods, only: :update
+  end
 end
