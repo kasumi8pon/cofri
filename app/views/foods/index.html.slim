@@ -13,7 +13,18 @@ table.table
     - @foods.each do |food|
       tr
         td= link_to food.name, food
-        td= food.amount
+        td#app
+          ul ref="amounts"
+          - %w(empty short enough).each.with_index do |amount, i|
+            - if food.amount == amount
+              li.amount_button v-bind:class="{ now: Active#{i} }" v-on:click="changeAmount(#{food.id}, '#{amount}')" ref="first"
+                = amount
+            - else
+              li.amount_button v-bind:class="{ now: Active#{i} }" v-on:click="changeAmount(#{food.id}, '#{amount}')" 
+                = amount
+
         td= food.food_category.name unless food.food_category.nil?
         td= link_to "編集", edit_food_path(food)
         td= link_to "削除", food, method: :delete, data: { confirm: "#{food.name}を削除します。よろしいですか？" }
+        = javascript_pack_tag 'foods_button' 
+

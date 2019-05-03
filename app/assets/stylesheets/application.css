@@ -13,3 +13,14 @@
  *= require_tree .
  *= require_self
  */
+
+.amount_button {
+  color: gray;
+  cursor: pointer
+}
+
+.amount_button.now {
+  color: pink;
+  cursor: default;
+}
+
