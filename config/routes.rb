@@ -12,6 +12,6 @@ Rails.application.routes.draw do
   resources :invitations, only: [:create, :edit, :update, :show]
 
   namespace "api" do
-    resources :foods, only: :update
+    resources :foods, only: [:index, :update]
   end
 end

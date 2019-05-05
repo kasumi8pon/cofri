@@ -2,29 +2,25 @@ h1 冷蔵庫の中身
 = link_to "食材を追加", new_food_path, class: "nav-link"
 = link_to "カテゴリーを追加", new_food_category_path
 
-table.table
-  thead.thead
-    tr
-      th= Food.human_attribute_name(:name)
-      th= Food.human_attribute_name(:amount)
-      th= Food.human_attribute_name(:food_category)
-      th
-  tbody
-    - @foods.each do |food|
+div#app
+  table.table
+    thead.thead
       tr
-        td= link_to food.name, food
-        td#app
-          ul ref="amounts"
-          - %w(empty short enough).each.with_index do |amount, i|
-            - if food.amount == amount
-              li.amount_button v-bind:class="{ now: Active#{i} }" v-on:click="changeAmount(#{food.id}, '#{amount}')" ref="first"
-                = amount
-            - else
-              li.amount_button v-bind:class="{ now: Active#{i} }" v-on:click="changeAmount(#{food.id}, '#{amount}')" 
-                = amount
+        th= Food.human_attribute_name(:name)
+        th= Food.human_attribute_name(:amount)
+        th= Food.human_attribute_name(:food_category)
+        th
+    tbody
+      tr v-for="food in foods" :key="food.id"
+        td
+          a :href="path('show', food.id)"= "{{ food.name }}"
+        td
+          ul v-for="(amount, index) in notCurrentAmounts"
+            li.amount_button :class="{'now': food.amount == index }" v-on:click="changeAmount(food.id, index)"= "{{ amount.label }}"
+        td= "{{ food.category }}"
+        td
+          a :href="path('edit', food.id)"= "編集"
+        td
+          a :data-confirm="dataConfirm(food.name)" rel="nofollow" data-method="delete" :href="path('delete', food.id)"= "削除"
 
-        td= food.food_category.name unless food.food_category.nil?
-        td= link_to "編集", edit_food_path(food)
-        td= link_to "削除", food, method: :delete, data: { confirm: "#{food.name}を削除します。よろしいですか？" }
-        = javascript_pack_tag 'foods_button' 
-
+= javascript_pack_tag 'foods'
