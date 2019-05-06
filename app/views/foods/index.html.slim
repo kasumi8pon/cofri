@@ -3,6 +3,8 @@ h1 冷蔵庫の中身
 = link_to "カテゴリーを追加", new_food_category_path
 
 div#app
+  label v-for="label in amounts"
+    input type="radio" v-bind:value="label.value" v-model="selectedAmount"= "{{ label.label }}"
   table.table
     thead.thead
       tr
@@ -11,13 +13,13 @@ div#app
         th= Food.human_attribute_name(:food_category)
         th
     tbody
-      tr v-for="food in foods" :key="food.id"
+      tr v-for="food in computedFoods" :key="food.id"
         td
           a :href="path('show', food.id)"= "{{ food.name }}"
         td
-          ul v-for="(amount, index) in notCurrentAmounts"
+          ul v-for="(amount, index) in amountList"
             li.amount_button :class="{'now': food.amount == index }" v-on:click="changeAmount(food.id, index)"= "{{ amount.label }}"
-        td= "{{ food.category }}"
+        td= "{{ food.food_category.name }}"
         td
           a :href="path('edit', food.id)"= "編集"
         td

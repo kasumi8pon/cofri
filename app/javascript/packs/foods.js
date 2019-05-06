@@ -14,6 +14,7 @@ new Vue ({
       { value: 1, label: 'short' },
       { value: 2, label: 'enough'}
     ],
+    selectedAmount: -1
   },
 
   created: function () {
@@ -25,9 +26,15 @@ new Vue ({
   },
 
   computed: {
-    notCurrentAmounts: function() {
+    amountList: function() {
       return this.amounts.filter(amount => amount.value >= 0)
     },
+
+    computedFoods: function() {
+      return this.foods.filter(function(el) {
+        return this.selectedAmount < 0 ? true: this.selectedAmount === el.amount
+      }, this)
+    }
   },
 
   methods: {
