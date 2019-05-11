@@ -18,7 +18,8 @@ new Vue ({
       { value: 1, label: 'short' },
       { value: 2, label: 'enough'}
     ],
-    selectedAmount: -1
+    selectedAmount: -1,
+    searchQuery: ''
   },
 
   created: function () {
@@ -40,11 +41,19 @@ new Vue ({
     },
 
     computedFoods: function() {
+      var searchQuery = this.searchQuery
       var foods = this.foods.filter(function(el) {
         return this.selectedAmount < 0 ? true: this.selectedAmount === el.amount
       }, this).filter(function(el) {
         return this.selectedCategory < 0 ? true: this.selectedCategory === el.food_category.id
       }, this)
+      if (searchQuery) {
+        foods = foods.filter(function (row) {
+          return Object.keys(row).some(function (key) {
+            return String(row[key]).toLowerCase().indexOf(searchQuery) > -1
+          })
+        })
+      }
       return foods;
     }
   },

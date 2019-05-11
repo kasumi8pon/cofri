@@ -3,6 +3,8 @@ h1 冷蔵庫の中身
 = link_to "カテゴリーを追加", new_food_category_path
 
 div#app
+  label for="search" 検索
+  input#search v-model="searchQuery"
   label v-for="label in amounts"
     input type="radio" v-bind:value="label.value" v-model="selectedAmount"= "{{ label.label }}"
   table.table
