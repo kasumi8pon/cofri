@@ -68,3 +68,4 @@ gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "slim-rails"
 gem "html2slim"
 gem "webpacker", github: "rails/webpacker"
+gem "acts_as_list"
