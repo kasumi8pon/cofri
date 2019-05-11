@@ -2,32 +2,4 @@ h1 冷蔵庫の中身
 = link_to "食材を追加", new_food_path, class: "nav-link"
 = link_to "カテゴリーを追加", new_food_category_path
 
-div#app
-  label for="search" 検索
-  input#search v-model="searchQuery"
-  label v-for="label in amounts"
-    input type="radio" v-bind:value="label.value" v-model="selectedAmount"= "{{ label.label }}"
-  table.table
-    thead.thead
-      tr
-        th= Food.human_attribute_name(:name)
-        th= Food.human_attribute_name(:amount)
-        th
-          = Food.human_attribute_name(:food_category)
-          select v-model="selectedCategory"
-            option v-for="category in categories" name="category" :value="category.id"= "{{ category.name }}"
-        th
-    tbody
-      tr v-for="food in computedFoods" :key="food.id"
-        td
-          a :href="path('show', food.id)"= "{{ food.name }}"
-        td
-          ul v-for="(amount, index) in amountList"
-            li.amount_button :class="{'now': food.amount == index }" v-on:click="changeAmount(food.id, index)"= "{{ amount.label }}"
-        td= "{{ food.food_category.name }}"
-        td
-          a :href="path('edit', food.id)"= "編集"
-        td
-          a :data-confirm="dataConfirm(food.name)" rel="nofollow" data-method="delete" :href="path('delete', food.id)"= "削除"
-
-= javascript_pack_tag 'foods'
+#foods(data-column-name="#{Food.human_attribute_name(:name)}" data-column-amount="#{Food.human_attribute_name(:amount)}" data-column-food-category="#{Food.human_attribute_name(:food_category)}")
