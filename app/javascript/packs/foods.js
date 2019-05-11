@@ -8,6 +8,10 @@ new Vue ({
   el: '#app',
   data: {
     foods: [],
+    categories: [
+      { id: -1, name: 'カテゴリー'}
+    ],
+    selectedCategory: -1,
     amounts: [
       { value: -1, label: 'すべて' },
       { value: 0, label: 'empty' },
@@ -23,6 +27,11 @@ new Vue ({
         this.foods.push(response.data.foods[i]);
       };
     });
+    axios.get('api/food_categories').then((response) => {
+      for(var i = 0; i < response.data.food_categories.length; i++) {
+        this.categories.push(response.data.food_categories[i]);
+      };
+    });
   },
 
   computed: {
@@ -31,9 +40,12 @@ new Vue ({
     },
 
     computedFoods: function() {
-      return this.foods.filter(function(el) {
+      var foods = this.foods.filter(function(el) {
         return this.selectedAmount < 0 ? true: this.selectedAmount === el.amount
+      }, this).filter(function(el) {
+        return this.selectedCategory < 0 ? true: this.selectedCategory === el.food_category.id
       }, this)
+      return foods;
     }
   },
 

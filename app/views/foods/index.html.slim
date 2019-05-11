@@ -10,7 +10,10 @@ div#app
       tr
         th= Food.human_attribute_name(:name)
         th= Food.human_attribute_name(:amount)
-        th= Food.human_attribute_name(:food_category)
+        th
+          = Food.human_attribute_name(:food_category)
+          select v-model="selectedCategory"
+            option v-for="category in categories" name="category" :value="category.id"= "{{ category.name }}"
         th
     tbody
       tr v-for="food in computedFoods" :key="food.id"

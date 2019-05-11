@@ -13,5 +13,6 @@ Rails.application.routes.draw do
 
   namespace "api" do
     resources :foods, only: [:index, :update]
+    resources :food_categories, only: :index
   end
 end
