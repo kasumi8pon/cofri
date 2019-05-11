@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   delete "/logout", to: "sessions#destroy"
   root to: "foods#index"
   resources :foods
-  resources :food_categories, except: :show
+  resources :food_categories, except: :show do
+    resource :position, only: [:update], controller: "food_categories/position"
+  end
   resources :users, except: :index
   resources :invitations, only: [:create, :edit, :update, :show]
 

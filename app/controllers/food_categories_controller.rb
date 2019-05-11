@@ -2,7 +2,7 @@
 
 class FoodCategoriesController < ApplicationController
   def index
-    @food_categories = current_group.food_categories
+    @food_categories = current_group.food_categories.order("position")
   end
 
   def new
