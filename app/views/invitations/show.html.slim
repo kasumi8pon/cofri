@@ -1,4 +1,9 @@
+= render "slack_button_widget"
+
 h1 招待アドレス
 = label_tag :invitation_url, "URL"
 = text_field_tag :invitation_url, edit_invitation_url(@invitation.id, token: @invitation.invitation_token)
 #copy
+
+= link_to share_url(@invitation), onclick: "window.open(this.href, 'Slackで共有する', 'height=400, width=600');return false;" do
+  = "Slackで共有する"
