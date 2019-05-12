@@ -4,6 +4,7 @@
         li= message
 
 = form_with model: food_category, local: true do |f|
+  = f.hidden_field :from, value: params[:from]
   .form-group
     = f.label :name
     = f.text_field :name, class: "form-control"
