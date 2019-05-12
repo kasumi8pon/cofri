@@ -16,3 +16,4 @@
 // const imagePath = (name) => images(name, true)
 
 require('../foods.js')
+require('../copy.js')
