@@ -10,6 +10,7 @@ class FoodsController < ApplicationController
   end
 
   def new
+    @current_group = current_group
     @food = Food.new
   end
 
@@ -23,6 +24,7 @@ class FoodsController < ApplicationController
   end
 
   def edit
+    @current_group = current_group
     @food = current_group.foods.find(params[:id])
   end
 
