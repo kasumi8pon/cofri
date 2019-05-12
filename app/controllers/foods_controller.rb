@@ -14,9 +14,9 @@ class FoodsController < ApplicationController
   end
 
   def create
-    food = current_group.foods.new(food_params)
-    if food.save
-      redirect_to foods_url, notice: "#{food.name}を冷蔵庫に登録しました"
+    @food = current_group.foods.new(food_params)
+    if @food.save
+      redirect_to foods_url, notice: "#{@food.name}を冷蔵庫に登録しました"
     else
       render "new"
     end
@@ -27,18 +27,18 @@ class FoodsController < ApplicationController
   end
 
   def update
-    food = current_group.foods.find(params[:id])
-    if food.update(food_params)
-      redirect_to foods_url, notice: "#{food.name}の情報を更新しました"
+    @food = current_group.foods.find(params[:id])
+    if @food.update(food_params)
+      redirect_to foods_url, notice: "#{@food.name}の情報を更新しました"
     else
       render "edit"
     end
   end
 
   def destroy
-    food = current_group.foods.find(params[:id])
-    food.destroy
-    redirect_to foods_url, notice: "#{food.name}を冷蔵庫から削除しました"
+    @food = current_group.foods.find(params[:id])
+    @food.destroy
+    redirect_to foods_url, notice: "#{@food.name}を冷蔵庫から削除しました"
   end
 
   private

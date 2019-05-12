@@ -20,11 +20,11 @@ class InvitationsController < ApplicationController
   def update
     @invitation = Invitation.find(params[:id])
     group = @invitation.user_group
-    user = group.users.create(user_params)
+    @user = group.users.create(user_params)
 
-    if user.save
+    if @user.save
       @invitation.update(sign_up: true)
-      redirect_to foods_url, notice: "#{user.name}としてユーザー登録しました"
+      redirect_to foods_url, notice: "#{@user.name}としてユーザー登録しました"
     else
       render "new"
     end
