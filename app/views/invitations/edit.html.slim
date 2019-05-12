@@ -1,4 +1,10 @@
 h1 ユーザー登録
+
+- if @user.errors.present?
+  ul#error_explanation
+    - @user.errors.full_messages.each do |message|
+        li= message
+
 = form_with model: @user, url: invitation_path(@invitation), html: {method: "patch"}, local: true do |f|
   .form-group
     = f.label :name

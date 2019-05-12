@@ -9,10 +9,10 @@ class UsersController < ApplicationController
 
   def create
     group = UserGroup.create
-    user = group.users.create(user_params)
-    if user.save
+    @user = group.users.create(user_params)
+    if @user.save
       session[:user_id] = user.id
-      redirect_to foods_url, notice: "#{user.name}としてユーザー登録しました"
+      redirect_to foods_url, notice: "#{@user.name}としてユーザー登録しました"
     else
       render "new"
     end
@@ -23,18 +23,18 @@ class UsersController < ApplicationController
   end
 
   def update
-    user = User.find(params[:id])
-    if user.update(user_params)
-      redirect_to foods_url, notice: "#{user.name}の情報を更新しました"
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+      redirect_to foods_url, notice: "#{@user.name}の情報を更新しました"
     else
       render "edit"
     end
   end
 
   def destroy
-    user = User.find(params[:id])
-    user.destroy
-    redirect_to root_url, notice: "#{user.name}を削除しました"
+    @user = User.find(params[:id])
+    @user.destroy
+    redirect_to root_url, notice: "#{@user.name}を削除しました"
   end
 
   private

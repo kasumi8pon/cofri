@@ -1,4 +1,9 @@
-= form_with model: @food_category, local: true do |f|
+- if food_category.errors.present?
+  ul#error_explanation
+    - food_category.errors.full_messages.each do |message|
+        li= message
+
+= form_with model: food_category, local: true do |f|
   .form-group
     = f.label :name
     = f.text_field :name, class: "form-control"
