@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     group = UserGroup.create
     @user = group.users.create(user_params)
     if @user.save
-      session[:user_id] = user.id
+      session[:user_id] = @user.id
       redirect_to foods_url, notice: "#{@user.name}としてユーザー登録しました"
     else
       render "new"
