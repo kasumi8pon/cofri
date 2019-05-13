@@ -18,5 +18,5 @@
   .form_group
     = f.label :food_category_id
     = f.collection_select :food_category_id, currrent_group.food_categories , :id, :name, prompt: true
-    = link_to "＋", new_food_category_path(from: "food")
+    = link_to "＋", new_food_category_path(from: from, edit_id: food.id)
   = f.submit nil, class: "btn"

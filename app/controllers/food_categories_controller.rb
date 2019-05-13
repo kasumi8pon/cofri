@@ -12,10 +12,12 @@ class FoodCategoriesController < ApplicationController
   def create
     @food_category = current_group.food_categories.new(food_category_params)
     if @food_category.save
-      if params[:from] == "food"
-        redirect_to food_categories_url, notice: "カテゴリー #{@food_category.name} を登録しました"
+      if params[:food_category][:from] == "food_new"
+        redirect_to new_food_url, notice: "カテゴリー #{@food_category.name} を登録しました"
+      elsif params[:food_category][:from] == "food_edit"
+        redirect_to edit_food_url(params[:food_category][:edit_id]), notice: "カテゴリー #{@food_category.name} を登録しました"
       else
-        redirect_to foods_url, notice: "#{@food_category.name} を登録しました"
+        redirect_to food_categories_url, notice: "#{@food_category.name} を登録しました"
       end
     else
       render "new"
