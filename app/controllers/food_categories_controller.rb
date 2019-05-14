@@ -39,8 +39,11 @@ class FoodCategoriesController < ApplicationController
 
   def destroy
     @food_category = current_group.food_categories.find(params[:id])
-    @food_category.destroy
-    redirect_to food_categories_url, notice: "カテゴリー #{@food_category.name} を削除しました"
+    if @food_category.destroy
+      redirect_to food_categories_url, notice: "カテゴリー #{@food_category.name} を削除しました"
+    else
+      redirect_to food_categories_url, notice: "カテゴリー #{@food_category.name} には食材があるため、削除できませんでした"
+    end
   end
 
   private
