@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
     end
 
     def current_group
-      @current_user.user_group
+      @current_group ||= current_user.user_group
     end
 
     def login_required
