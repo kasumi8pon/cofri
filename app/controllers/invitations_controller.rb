@@ -24,9 +24,10 @@ class InvitationsController < ApplicationController
 
     if @user.save
       @invitation.update(sign_up: true)
+      session[:user_id] = @user.id
       redirect_to foods_url, notice: "#{@user.name}としてユーザー登録しました"
     else
-      render "new"
+      render "edit"
     end
   end
 
