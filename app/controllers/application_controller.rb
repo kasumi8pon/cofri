@@ -14,6 +14,10 @@ class ApplicationController < ActionController::Base
       @current_group ||= current_user.user_group
     end
 
+    def group_members
+      current_group.users.where.not(id: current_user.id)
+    end
+
     def login_required
       redirect_to login_path unless current_user
     end
