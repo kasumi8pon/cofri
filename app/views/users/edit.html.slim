@@ -1,6 +1,14 @@
 h1 ユーザー情報編集
-= link_to "食材一覧画面に戻る", foods_path, class: "nav-link"
-= link_to "ユーザーを招待する", invitations_path, method: :post
 = render partial: "form", locals: { user: @user }
 = link_to "ユーザー削除", @user, method: :delete, data: { confirm: "#{@user.name}を削除します。よろしいですか？" }
+
+h1 グループ情報
+- if @group_members.present?
+  p あなたは以下のユーザーとcoFriの情報を共有しています
+  ul
+    - @group_members.each do |member|
+      li= member.name
+- else
+  p あなたは他のユーザーとcoFriの情報を共有していません
+= link_to "ユーザーを招待する", invitations_path, method: :post
 
