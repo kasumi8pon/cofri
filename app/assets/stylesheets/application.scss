@@ -14,13 +14,19 @@
  *= require_self
  */
 
-.amount_button {
-  color: gray;
-  cursor: pointer
-}
 
-.amount_button.now {
-  color: pink;
+@import "bulmaswatch/minty/_variables.scss";
+$gap: 128px;
+@import 'bulma/bulma.sass';
+@import "bulmaswatch/minty/_overrides.scss";
+
+.table {
+  td.amount {
+    width: 100px;
+  };
+};
+
+.amount.is-primary {
   cursor: default;
 }
 

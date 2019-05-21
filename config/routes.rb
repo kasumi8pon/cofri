@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resource :position, only: [:update], controller: "food_categories/position"
   end
   resources :users, except: :index
+  resources :user_groups, only: [:show]
   resources :invitations, only: [:create, :edit, :update, :show]
 
   namespace "api" do

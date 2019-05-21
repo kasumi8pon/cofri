@@ -4,19 +4,29 @@
         li= message
 
 = form_with model: food, local: true do |f|
-  .form-group
-    = f.label :name
-    = f.text_field :name, class: "form-control"
-  .form-group
-    = f.label :amount
-    = f.radio_button :amount, :empty, checked: "checked", class: "form-control"
-    = f.label :empty
-    = f.radio_button :amount, :short, class: "form-control"
-    = f.label :short
-    = f.radio_button :amount, :enough, class: "form-control"
-    = f.label :enough
-  .form_group
-    = f.label :food_category_id
-    = f.collection_select :food_category_id, currrent_group.food_categories , :id, :name
-    = link_to "＋", new_food_category_path(from: from, edit_id: food.id)
-  = f.submit nil, class: "btn"
+  .field
+    = f.label :name, class: "label"
+    .control
+      = f.text_field :name,  class: "input"
+  .field
+    = f.label :amount, class: "label"
+    .control
+      = f.radio_button :amount, :empty, checked: "checked"
+      = f.label :empty, class: "radio"
+      = f.radio_button :amount, :short
+      = f.label :short, class: "radio"
+      = f.radio_button :amount, :enough
+      = f.label :enough, class: "radio"
+  .field.
+    = f.label :food_category_id, class: "label"
+  .field.is-grouped
+    .control
+      .select
+        = f.collection_select :food_category_id, currrent_group.food_categories, :id, :name
+    .control
+      = link_to new_food_category_path(from: from, edit_id: food.id), class: "button is-rounded" do
+        span.icon.is-large
+          i.fas.fa-plus
+  .field
+    .control
+      = f.submit nil, class: "button is-primary"

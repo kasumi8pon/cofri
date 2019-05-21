@@ -1,4 +1,10 @@
-h1 カテゴリーを追加
-
-= link_to "一覧画面に戻る", food_categories_path, class: "nav-link"
-= render partial: "form", locals: { food_category: @food_category }
+.section
+  .container
+    .columns.is-centered
+      .column.is-three-quarters
+        .level.is-mobile
+          .level-left
+            h1.title カテゴリーを追加
+          .level-right
+            = link_to "戻る", food_categories_path, class: "button"
+        = render partial: "form", locals: { food_category: @food_category }

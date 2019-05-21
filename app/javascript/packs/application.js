@@ -15,5 +15,6 @@
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
+require('../nav.js')
 require('../foods.js')
 require('../copy.js')

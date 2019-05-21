@@ -33,6 +33,7 @@ class InvitationsController < ApplicationController
 
   def show
     @invitation = Invitation.find(params[:id])
+    @user_group = @invitation.user_group
     @invitation.create_digest
   end
 

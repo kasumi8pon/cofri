@@ -4,11 +4,13 @@
         li= message
 
 = form_with model: food_category, local: true do |f|
-  - puts params[:from]
   = f.hidden_field :from, value: params[:from]
   = f.hidden_field :edit_id, value: params[:edit_id]
-  .form-group
-    = f.label :name
-    = f.text_field :name, class: "form-control"
-  = f.submit nil, class: "btn"
+  .field
+    = f.label :name, class: "label"
+    .control
+        = f.text_field :name, class: "input"
+  .field
+    .control
+      = f.submit nil, class: "button is-primary"
   

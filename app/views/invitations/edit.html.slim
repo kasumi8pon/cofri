@@ -1,23 +1,30 @@
-h1 ユーザー登録
+.section
+  .container
+    h1.title ユーザー登録
 
-- if @user.errors.present?
-  ul#error_explanation
-    - @user.errors.full_messages.each do |message|
-        li= message
+    - if @user.errors.present?
+      ul#error_explanation
+        - @user.errors.full_messages.each do |message|
+            li= message
 
-= form_with model: @user, url: invitation_path(@invitation), html: {method: "patch"}, local: true do |f|
-  .form-group
-    = f.label :name
-    = f.text_field :name, class: "form-control"
-  .form-group
-    = f.label :email
-    = f.email_field :email, class: "form-control"
-  .form-group
-    = f.label :password
-    = f.password_field :password, class: "form-control"
-  .form-group
-    = f.label :password_confirmation
-    = f.password_field :password_confirmation, class: "form-control"
-  = hidden_field_tag :invitation_id, @invitation.id
-  = f.submit nil, class: "btn"
+    = form_with model: @user, url: invitation_path(@invitation), html: {method: "patch"}, local: true do |f|
+      .field
+        = f.label :name, class: "label"
+        .control
+          = f.text_field :name, class: "input"
+      .field
+        = f.label :email, class: "label"
+        .control
+          = f.email_field :email, class: "input"
+      .field
+        = f.label :password, class: "label"
+        .control
+          = f.password_field :password, class: "input"
+      .field
+        = f.label :password_confirmation, class: "label"
+        .control
+          = f.password_field :password_confirmation, class: "input"
+      = hidden_field_tag :invitation_id, @invitation.id
+      .control
+        = f.submit nil, class: "button is-primary"
 

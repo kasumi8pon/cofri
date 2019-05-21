@@ -1,20 +1,29 @@
-h1 カテゴリー一覧
-= link_to "カテゴリーを追加", new_food_category_path, class: "nav-link"
-
-table.table
-  thead.thead
-    tr
-      th= FoodCategory.human_attribute_name(:name)
-      th
-  tbody
-    - @food_categories.each do |food_category|
-      tr
-        td= food_category.name
-        td= link_to "編集", edit_food_category_path(food_category)
-        td= link_to "削除", food_category, method: :delete, data: { confirm: "#{food_category.name}を削除します。よろしいですか？" }
-        td= link_to "△", food_category_position_path(food_category, move: :top), method: :put, class: "button"
-        td= link_to "▲", food_category_position_path(food_category, move: :higher), method: :put, class: "button"
-        td= link_to "▼", food_category_position_path(food_category, move: :lower), method: :put, class: "button"
-        td= link_to "▽", food_category_position_path(food_category, move: :bottom), method: :put, class: "button"
-
-
+.section
+  .container
+    .columns.is-centered
+      .column.is-three-quarters
+        .level.is-mobile
+          .level-left
+            h1.title カテゴリー
+          .level-right
+            = link_to "カテゴリーを追加", new_food_category_path, class: "button is-primary"
+        table.table.is-striped.is-fullwidth
+          thead
+            tr
+              th= FoodCategory.human_attribute_name(:name)
+              th
+              th
+              th
+              th
+              th
+              th
+          tbody
+            - @food_categories.each do |food_category|
+              tr
+                td= food_category.name
+                td= link_to "△", food_category_position_path(food_category, move: :top), method: :put, class: "button is-rounded is-small"
+                td= link_to "▲", food_category_position_path(food_category, move: :higher), method: :put, class: "button is-rounded is-small"
+                td= link_to "▼", food_category_position_path(food_category, move: :lower), method: :put, class: "button is-rounded is-small"
+                td= link_to "▽", food_category_position_path(food_category, move: :bottom), method: :put, class: "button is-rounded is-small"
+                td= link_to "編集", edit_food_category_path(food_category), class: "button is-small"
+                td= link_to "削除", food_category, method: :delete, data: { confirm: "#{food_category.name}を削除します。よろしいですか？" }, class: "button is-danger is-small"
