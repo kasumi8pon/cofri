@@ -23,7 +23,7 @@
       </thead>
       <tbody>
         <tr v-for="food in computedFoods" :key="food.id">
-          <td><a :href="path('show', food.id)">{{ food.name }}</a></td>
+          <td>{{ food.name }}</td>
           <td>
             <ul v-for="(amount, index) in amountList">
               <li class="amount_button" :class="{'now': food.amount == index }" v-on:click="changeAmount(food.id, index)">
@@ -105,8 +105,6 @@ export default {
   methods: {
     path: function(method, id) {
       switch(method) {
-        case 'show':
-          return 'foods/'+id;
         case 'delete':
           return 'foods/'+id;
         case 'edit':
