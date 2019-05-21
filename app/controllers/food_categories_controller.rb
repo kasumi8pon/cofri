@@ -7,6 +7,7 @@ class FoodCategoriesController < ApplicationController
 
   def new
     @food_category = FoodCategory.new
+    @back_path = back_path
   end
 
   def create
@@ -50,5 +51,15 @@ class FoodCategoriesController < ApplicationController
 
     def food_category_params
       params.require(:food_category).permit(:name)
+    end
+
+    def back_path
+      if params[:from] == "food_new"
+        new_food_url
+      elsif params[:from] == "food_edit"
+        edit_food_url(params[:edit_id])
+      else
+        food_categories_url
+      end
     end
 end
