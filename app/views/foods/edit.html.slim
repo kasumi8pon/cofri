@@ -1,4 +1,10 @@
-h1 食材情報の編集
-
-= link_to "食材一覧", foods_path, class: "nav-link"
-= render partial: "form", locals: { food: @food, currrent_group: @current_group, from: "food_edit" }
+.section
+  .container
+    .columns.is-centered
+      .column.is-three-quarters
+        .level.is-mobile
+          .level-left
+            h1.title 食材の編集
+          .level-right
+            = link_to "戻る", foods_path, class: "button"
+        = render partial: "form", locals: { food: @food, currrent_group: @current_group, from: "food_edit" }

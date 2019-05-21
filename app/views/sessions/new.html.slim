@@ -1,10 +1,18 @@
-h1 ログイン
+.section
+  .container
+    .columns.is-centered
+      .column.is-three-quarters
+        h1.title ログイン
 
-= form_with scope: :session, local: true do |f|
-  .form_group
-    = f.label :email, "メールアドレス"
-    = f.email_field :email, class: "form-control"
-  .form_group
-    = f.label :password, "パスワード"
-    = f.password_field :password, class: "form-control"
-  = f.submit "ログインする", class: "btn"
+        = form_with scope: :session, local: true do |f|
+          .field
+            = f.label :email, "メールアドレス", class: "label"
+            .control
+              = f.email_field :email, class: "input"
+          .field
+            = f.label :password, "パスワード", class: "label"
+            .control
+              = f.password_field :password, class: "input"
+          .field
+            .control
+              = f.submit "ログイン", class: "button is-primary"

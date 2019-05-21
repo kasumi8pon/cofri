@@ -1,6 +1,5 @@
 <template>
-  <input type="button" value="URLをコピーする" v-on:click="copyUrl">
-
+  <input type="button" value="コピーする" v-on:click="copyUrl" class="button">
 </template>
 <script>
 export default {

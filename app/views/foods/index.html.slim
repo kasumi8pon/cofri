@@ -1,4 +1,11 @@
-h1 冷蔵庫の中身
-= link_to "食材を追加", new_food_path, class: "nav-link"
+.section
+  .container
+    .columns.is-centered
+      .column.is-three-quarters
+        .level.is-mobile
+          .level-left
+            h1.title 冷蔵庫のなかみ
+          .level-right
+            = link_to "食材を追加", new_food_path, class: "button is-primary"
 
-#foods(data-column-name="#{Food.human_attribute_name(:name)}" data-column-amount="#{Food.human_attribute_name(:amount)}" data-column-food-category="#{Food.human_attribute_name(:food_category)}")
+        #foods(data-column-name="#{Food.human_attribute_name(:name)}" data-column-amount="#{Food.human_attribute_name(:amount)}" data-column-food-category="#{Food.human_attribute_name(:food_category)}")

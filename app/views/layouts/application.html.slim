@@ -3,21 +3,22 @@ html
   head
     title
       | Cofri
+    meta name="viewport" content="width=device-width, initial-scale=1"
+    script defer="defer" src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" 
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
     = javascript_pack_tag    'application'
   body
-    ul
-      - if current_user
-        li= link_to "冷蔵庫のなかみ", foods_path, class: "nav-link"
-        li= link_to "カテゴリー一覧", food_categories_path, class: "nav-link"
-        li= link_to "ユーザー情報", edit_user_path(current_user), class: "nav-link"
-        li= link_to "ログアウト", logout_path, method: :delete, class: "nav-link"
-      - else
-        li= link_to "ログイン", login_path, class: "nav-link"
-        li= link_to "ユーザー登録", new_user_path, class: "nav-link"
+    .hero.is-primary
+      .hero-head
+        .container
+          #nav(current-user-id="#{current_user&.id}")
     - if flash.notice.present?
-      = flash.notice
+      .hero.is-light
+        .hero-head
+          .container
+            .notification.is-light
+              = flash.notice
     = yield

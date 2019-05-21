@@ -1,4 +1,10 @@
-h1 カテゴリー名の編集
-
-= link_to "カテゴリー一覧", food_categories_path, class: "nav-link"
-= render partial: "form", locals: { food_category: @food_category }
+.section
+  .container
+    .columns.is-centered
+      .column.is-three-quarters
+        .level.is-mobile
+          .level-left
+            h1.title カテゴリー名の編集
+          .level-right
+            = link_to "戻る", food_categories_path, class: "button"
+        = render partial: "form", locals: { food_category: @food_category }

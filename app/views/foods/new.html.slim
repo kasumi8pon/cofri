@@ -1,4 +1,11 @@
-h1 食材を追加
+.section
+  .container
+    .columns.is-centered
+      .column.is-three-quarters
+        .level.is-mobile
+          .level-left
+            h1.title 食材を追加
+          .level-right
+            = link_to "戻る", foods_path, class: "button"
 
-= link_to "一覧画面に戻る", foods_path, class: "nav-link"
-= render partial: "form", locals: { food: @food, currrent_group: @current_group, from: "food_new" }
+        = render partial: "form", locals: { food: @food, currrent_group: @current_group, from: "food_new" }
