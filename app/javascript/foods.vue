@@ -13,7 +13,7 @@
         </label>
       </div>
     </div>
-    <a v-on:click="postSlack" class="button">
+    <a v-on:click="postSlack" class="button" v-bind:disabled="isButtonDisabled">
       <span class="icon is-large has-text-primary">
         <i class="fab fa-slack"></i>
       </span>
@@ -123,6 +123,14 @@ export default {
       return foods;
     },
 
+    isButtonDisabled: function () {
+      if (this.checkedFoods.length == 0) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+
     checkedFoods: function() {
       var foods = this.computedFoods.filter(function(el) {
         return el.checked
@@ -150,8 +158,10 @@ export default {
     },
 
     postSlack: function() {
-      window.open(this.askUrl(), 'Slackで共有する', 'height=400, width=600');
+      if (this.isButtonDisabled == false) {
+        window.open(this.askUrl(), 'Slackで共有する', 'height=400, width=600');
       return false;
+      }
     },
 
     selectAllFoods () {
