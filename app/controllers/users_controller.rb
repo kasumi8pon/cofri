@@ -19,7 +19,6 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @group_members = group_members
     @user = User.find(params[:id])
   end
 
