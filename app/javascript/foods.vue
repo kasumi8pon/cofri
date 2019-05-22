@@ -13,9 +13,16 @@
         </label>
       </div>
     </div>
+    <a v-on:click="postSlack" class="button">
+      <span class="icon is-large has-text-primary">
+        <i class="fab fa-slack"></i>
+      </span>
+      <span>Slackで買い物を頼む</span>
+    </a>
     <table class="table is-striped is-fullwidth">
       <thead>
         <tr>
+          <th><input type="checkbox" :checked="isAllSelected" v-on:click="selectAllFoods"></th>
           <th>{{ name }}</th>
           <th>{{ amount }}</th>
           <th>
@@ -33,6 +40,7 @@
       </thead>
       <tbody>
         <tr v-for="food in computedFoods" :key="food.id">
+          <td><input type="checkbox" v-model="food.checked" v-on:change="select"></td>
           <td>{{ food.name }}</td>
           <td class="amount">
             <div class="columns">
@@ -42,7 +50,7 @@
                 </div>
               </div>
             </div>
-          <td>{{ food.food_category.name }}</td>
+          <td>{{food.food_category.name}}</td>
           <td class="edit"><a :href="path('edit', food.id)" class="button is-small">編集</a></td>
           <td class="destroy"><a :data-confirm="dataConfirm(food.name)" rel="nofollow" data-method="delete" :href="path('delete', food.id)" class="button is-small is-danger">削除</a></td>
         </tr>
@@ -73,13 +81,15 @@ export default {
         { value: 2, label: 'enough'}
       ],
       selectedAmount: -1,
-      searchQuery: ''
+      searchQuery: '',
+      isAllSelected: false
     }
   },
 
   created: function () {
     axios.get('api/foods').then((response) => {
       for(var i = 0; i < response.data.foods.length; i++) {
+        response.data.foods[i].checked = false
         this.foods.push(response.data.foods[i]);
       };
     });
@@ -88,6 +98,7 @@ export default {
         this.categories.push(response.data.food_categories[i]);
       };
     });
+
   },
 
   computed: {
@@ -110,6 +121,13 @@ export default {
         })
       }
       return foods;
+    },
+
+    checkedFoods: function() {
+      var foods = this.computedFoods.filter(function(el) {
+        return el.checked
+      }, this);
+      return foods
     }
   },
 
@@ -120,6 +138,44 @@ export default {
           return 'foods/'+id;
         case 'edit':
           return 'foods/'+id+'/edit';
+      }
+    },
+
+    askUrl: function() {
+      var checkedFoodsName = []
+      for(var i = 0; i < this.checkedFoods.length; i++) {
+        checkedFoodsName.push(this.checkedFoods[i].name);
+      };
+      return "http://slackbutton.herokuapp.com/post/new?url=帰りに" + checkedFoodsName.join('と') + "を買ってきて";
+    },
+
+    postSlack: function() {
+      window.open(this.askUrl(), 'Slackで共有する', 'height=400, width=600');
+      return false;
+    },
+
+    selectAllFoods () {
+      if (this.isAllSelected) {
+        this.isAllSelected = false
+        for(var i = 0; i < this.computedFoods.length; i++) {
+        this.computedFoods[i].checked = false
+        };
+      } else {
+        this.isAllSelected = true
+        for(var i = 0; i < this.computedFoods.length; i++) {
+        this.computedFoods[i].checked = true
+        };
+      }
+    },
+
+    select() {
+      var checkedFoods = this.computedFoods.filter(function(el) {
+        return el.checked
+      }, this);
+      if (checkedFoods.length !== this.computedFoods.length) {
+        this.isAllSelected = false
+      } else {
+        this.isAllSelected = true
       }
     },
 
