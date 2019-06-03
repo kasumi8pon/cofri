@@ -1,4 +1,6 @@
-require'rails_helper'
+# frozen_string_literal: true
+
+require "rails_helper"
 
 RSpec.describe "UserGroups", type: :system do
   it "自分と同じグループに属するユーザーがいる場合、グループ情報に表示されること" do

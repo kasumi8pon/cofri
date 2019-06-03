@@ -1,4 +1,6 @@
-require'rails_helper'
+# frozen_string_literal: true
+
+require "rails_helper"
 
 RSpec.describe "Invitations", type: :system do
   before do
@@ -7,12 +9,12 @@ RSpec.describe "Invitations", type: :system do
     click_link "ユーザー情報"
     click_link "グループ情報"
     click_link "ユーザーを招待する"
-    @invitation_url = find('#invitation_url').value
+    @invitation_url = find("#invitation_url").value
   end
 
   it "招待URLを作成できること" do
     expect(page).to have_content "招待アドレス"
-    expect(find('#invitation_url').value).not_to eq ""
+    expect(find("#invitation_url").value).not_to eq ""
   end
 
   it "招待URLからユーザー登録できること" do

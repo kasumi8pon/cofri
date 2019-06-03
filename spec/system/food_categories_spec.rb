@@ -1,4 +1,6 @@
-require'rails_helper'
+# frozen_string_literal: true
+
+require "rails_helper"
 
 RSpec.describe "FoodCategories", type: :system do
   let(:user) { FactoryBot.create(:user) }
@@ -6,7 +8,7 @@ RSpec.describe "FoodCategories", type: :system do
   before do
     log_in_as(user)
   end
-    
+
   it "カテゴリーを新しく登録できること" do
     click_link "カテゴリー"
     click_link "カテゴリーを追加"
@@ -17,7 +19,7 @@ RSpec.describe "FoodCategories", type: :system do
 
   it "カテゴリーの情報を編集できること" do
     click_link "カテゴリー"
-    first('tbody tr').click_link "編集"
+    first("tbody tr").click_link "編集"
     fill_in "名称", with: "お菓子"
     click_button "更新する"
     expect(page).to have_content("カテゴリーの名称を お菓子 に更新しました")
@@ -26,7 +28,7 @@ RSpec.describe "FoodCategories", type: :system do
   it "1つも食材が属していないカテゴリーを削除できること" do
     click_link "カテゴリー"
     accept_alert do
-      first('tbody tr').click_link "削除"
+      first("tbody tr").click_link "削除"
     end
     expect(page).to have_content("カテゴリー なし を削除しました")
   end
@@ -39,7 +41,7 @@ RSpec.describe "FoodCategories", type: :system do
     click_button "登録する"
     click_link "カテゴリー"
     accept_alert do
-      first('tbody tr').click_link "削除"
+      first("tbody tr").click_link "削除"
     end
     expect(page).to have_content("カテゴリー なし には食材があるため、削除できませんでした")
   end
