@@ -26,9 +26,9 @@
           <th>{{ name }}</th>
           <th>{{ amount }}</th>
           <th>
-            {{ foodCategory }}
+            <label for="category">{{ foodCategory }}</label>
             <br>
-            <select v-model="selectedCategory" class="select">
+            <select v-model="selectedCategory" class="select" id="category">
               <option v-for="category in categories" name="category" :value="category.id">
                 {{ category.name }}
               </option>
@@ -45,9 +45,9 @@
           <td class="amount">
             <div class="columns">
               <div v-for="(amount, index) in amountList" class="column">
-                <div class="button is-rounded is-small amount" :class="{'is-primary': food.amount == index }" v-on:click="changeAmount(food.id, index)">
+                <button class="button is-rounded is-small amount" :class="{'is-primary': food.amount == index }" v-on:click="changeAmount(food.id, index)">
                   {{ amount.label }}
-                </div>
+                </button>
               </div>
             </div>
           <td>{{food.food_category.name}}</td>
@@ -62,8 +62,10 @@
 <script>
 import axios from 'axios';
 
-const csrfToken = document.querySelector("meta[name=csrf-token]").content;
-axios.defaults.headers.common['X-CSRF-Token'] = csrfToken;
+if (document.querySelector("meta[name=csrf-token]")) {
+  const csrfToken = document.querySelector("meta[name=csrf-token]").content;
+  axios.defaults.headers.common['X-CSRF-Token'] = csrfToken;
+}
 
 export default {
   props: ['name', 'amount', 'foodCategory'],
