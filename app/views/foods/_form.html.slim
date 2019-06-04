@@ -8,15 +8,6 @@
     = f.label :name, class: "label"
     .control
       = f.text_field :name,  class: "input"
-  .field
-    = f.label :amount, class: "label"
-    .control
-      = f.radio_button :amount, :empty, checked: "checked"
-      = f.label :empty, class: "radio"
-      = f.radio_button :amount, :short
-      = f.label :short, class: "radio"
-      = f.radio_button :amount, :enough
-      = f.label :enough, class: "radio"
   .field.
     = f.label :food_category_id, class: "label"
   .field.is-grouped

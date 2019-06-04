@@ -8,10 +8,15 @@ class Api::FoodsController < ApplicationController
 
   def update
     food = current_group.foods.find(params[:id])
-    if food.update(amount: params[:amount])
+    if food.update(food_params)
       head :ok
     else
       head :unprocessable_entity
     end
   end
+
+  private
+    def food_params
+      params.require(:food).permit(:name, :amount, :food_category_id, :to_buy)
+    end
 end

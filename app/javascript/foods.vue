@@ -1,28 +1,45 @@
 <template>
   <div>
-    <div class="field">
-      <label for="search" class="label">検索</label>
-      <div class="control">
-        <input id="search" v-model="searchQuery" class="input">
+    <div class="columns">
+      <div class="column">
+        <div class="field has-addons">
+          <div class="control">
+            <label class="button is-primary is-static" for="search">検索</label>
+          </div>
+          <div class="control">
+            <input id="search" v-model="searchQuery" class="input">
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            <label class="radio" v-for="label in amounts">
+              <input type="radio" v-bind:value="label.value" v-model="selectedAmount">
+              {{ label.label }}
+            </label>
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            <label class="checkbox">
+              <input type="checkbox" v-model="selectedToBuy">
+              買うもののみ表示
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <a v-on:click="postSlack" class="button is-pulled-right" :class="{'is-static': isButtonDisabled }">
+          <span class="icon is-large has-text-primary">
+            <i class="fab fa-slack"></i>
+          </span>
+          <span>買い物を頼む</span>
+        </a>
       </div>
     </div>
-    <div class="field">
-      <div class="control">
-        <label v-for="label in amounts" class="radio">
-          <input type="radio" v-bind:value="label.value" v-model="selectedAmount">{{ label.label }}</input>
-        </label>
-      </div>
-    </div>
-    <a v-on:click="postSlack" class="button" v-bind:disabled="isButtonDisabled">
-      <span class="icon is-large has-text-primary">
-        <i class="fab fa-slack"></i>
-      </span>
-      <span>Slackで買い物を頼む</span>
-    </a>
     <table class="table is-striped is-fullwidth">
       <thead>
         <tr>
-          <th><input type="checkbox" :checked="isAllSelected" v-on:click="selectAllFoods"></th>
+          <th>買うもの<br>チェック</th>
           <th>{{ name }}</th>
           <th>{{ amount }}</th>
           <th>
@@ -40,7 +57,12 @@
       </thead>
       <tbody>
         <tr v-for="food in computedFoods" :key="food.id">
-          <td><input type="checkbox" v-model="food.checked" v-on:change="select"></td>
+          <td class="to-buy">
+            <div class="buttons has-addons">
+              <span class="button is-small" :class="food.to_buy ? 'is-primary' : 'is-state is-light'" @click="changeToBuy(food.id)">ON</span>
+              <span class="button is-small" :class="!food.to_buy ? 'is-primary' : 'is-state is-light'" @click="changeToBuy(food.id)">OFF</span>
+            </div>
+          </td>
           <td>{{ food.name }}</td>
           <td class="amount">
             <div class="columns">
@@ -83,6 +105,7 @@ export default {
         { value: 2, label: 'enough'}
       ],
       selectedAmount: -1,
+      selectedToBuy: 0,
       searchQuery: '',
       isAllSelected: false
     }
@@ -114,6 +137,8 @@ export default {
         return this.selectedAmount < 0 ? true: this.selectedAmount === el.amount
       }, this).filter(function(el) {
         return this.selectedCategory < 0 ? true: this.selectedCategory === el.food_category.id
+      }, this).filter(function(el) {
+        return this.selectedToBuy == 0 ? true : el.to_buy
       }, this)
       if (searchQuery) {
         foods = foods.filter(function (row) {
@@ -126,16 +151,16 @@ export default {
     },
 
     isButtonDisabled: function () {
-      if (this.checkedFoods.length == 0) {
+      if (this.toBuyFoods.length == 0) {
         return true;
       } else {
         return false;
       }
     },
 
-    checkedFoods: function() {
-      var foods = this.computedFoods.filter(function(el) {
-        return el.checked
+    toBuyFoods: function() {
+      var foods = this.foods.filter(function(el) {
+        return el.to_buy
       }, this);
       return foods
     }
@@ -152,42 +177,17 @@ export default {
     },
 
     askUrl: function() {
-      var checkedFoodsName = []
-      for(var i = 0; i < this.checkedFoods.length; i++) {
-        checkedFoodsName.push(this.checkedFoods[i].name);
+      var toBuyFoodsName = []
+      for(var i = 0; i < this.toBuyFoods.length; i++) {
+        toBuyFoodsName.push(this.toBuyFoods[i].name);
       };
-      return "http://slackbutton.herokuapp.com/post/new?url=帰りに" + checkedFoodsName.join('と') + "を買ってきて";
+      return "http://slackbutton.herokuapp.com/post/new?url=帰りに" + toBuyFoodsName.join('と') + "を買ってきて";
     },
 
     postSlack: function() {
       if (this.isButtonDisabled == false) {
         window.open(this.askUrl(), 'Slackで共有する', 'height=400, width=600');
       return false;
-      }
-    },
-
-    selectAllFoods () {
-      if (this.isAllSelected) {
-        this.isAllSelected = false
-        for(var i = 0; i < this.computedFoods.length; i++) {
-        this.computedFoods[i].checked = false
-        };
-      } else {
-        this.isAllSelected = true
-        for(var i = 0; i < this.computedFoods.length; i++) {
-        this.computedFoods[i].checked = true
-        };
-      }
-    },
-
-    select() {
-      var checkedFoods = this.computedFoods.filter(function(el) {
-        return el.checked
-      }, this);
-      if (checkedFoods.length !== this.computedFoods.length) {
-        this.isAllSelected = false
-      } else {
-        this.isAllSelected = true
       }
     },
 
@@ -213,6 +213,23 @@ export default {
         amount: amount
       }).then(() => {
         this.foods[index].amount = amount;
+      });
+    },
+
+    checkAmount: function(amount, clicked) {
+      return amount == clicked;
+    },
+
+    changeToBuy: function (id) {
+      function findId(element) {
+        return element.id == id;
+      }
+      var index = this.foods.findIndex(findId);
+
+      axios.put('/api/foods/'+ id, { 
+        to_buy: !this.foods[index].to_buy
+      }).then(() => {
+        this.foods[index].to_buy = !this.foods[index].to_buy;
       });
     }
   }

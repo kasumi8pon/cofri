@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_11_161242) do
+ActiveRecord::Schema.define(version: 2019_06_03_071535) do
   create_table "food_categories", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -24,11 +24,12 @@ ActiveRecord::Schema.define(version: 2019_05_11_161242) do
 
   create_table "foods", force: :cascade do |t|
     t.string "name", null: false
-    t.integer "amount", null: false
+    t.integer "amount", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "food_category_id"
     t.integer "user_group_id"
+    t.boolean "to_buy", default: false
     t.index ["food_category_id"], name: "index_foods_on_food_category_id"
     t.index ["user_group_id"], name: "index_foods_on_user_group_id"
   end
