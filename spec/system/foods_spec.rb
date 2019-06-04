@@ -24,7 +24,6 @@ RSpec.describe "Foods", type: :system do
     click_link "食材を追加"
     fill_in "名称", with: "レタス"
     select "野菜", from: "カテゴリー"
-    choose "food_amount_enough"
     click_button "登録する"
     expect(page).to have_content("レタスを冷蔵庫に登録しました")
   end
@@ -33,7 +32,6 @@ RSpec.describe "Foods", type: :system do
     click_link "編集", match: :first
     fill_in "名称", with: "レタス"
     select "野菜", from: "カテゴリー"
-    choose "food_amount_empty"
     click_button "更新する"
     expect(page).to have_content("レタスの情報を更新しました")
   end
