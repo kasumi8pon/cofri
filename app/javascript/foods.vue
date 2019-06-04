@@ -213,6 +213,9 @@ export default {
         amount: amount
       }).then(() => {
         this.foods[index].amount = amount;
+        if (amount == 2) {
+          this.foods[index].to_buy = false
+        }
       });
     },
 
