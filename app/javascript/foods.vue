@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="columns">
-      <div class="column">
+      <div class="column is-three-quarters">
         <div class="field has-addons">
           <div class="control">
             <label class="button is-primary is-static" for="search">検索</label>
@@ -10,19 +10,18 @@
             <input id="search" v-model="searchQuery" class="input">
           </div>
         </div>
-        <div class="field">
-          <div class="control">
-            <label class="radio" v-for="label in amounts">
-              <input type="radio" v-bind:value="label.value" v-model="selectedAmount">
-              {{ label.label }}
-            </label>
-          </div>
-        </div>
-        <div class="field">
+
+        <div class="field is-grouped">
           <div class="control">
             <label class="checkbox">
-              <input type="checkbox" v-model="selectedToBuy">
-              買うもののみ表示
+              <input type="checkbox" v-model="onlyToBuy">
+              買うもののみ
+            </label>
+          </div>
+          <div class="control">
+            <label class="checkbox">
+              <input type="checkbox" v-model="onlyNotEmpty">
+              残量があるもののみ
             </label>
           </div>
         </div>
@@ -105,7 +104,8 @@ export default {
         { value: 2, label: 'enough'}
       ],
       selectedAmount: -1,
-      selectedToBuy: 0,
+      onlyToBuy: 0,
+      onlyNotEmpty: 0,
       searchQuery: '',
       isAllSelected: false
     }
@@ -134,11 +134,11 @@ export default {
     computedFoods: function() {
       var searchQuery = this.searchQuery
       var foods = this.foods.filter(function(el) {
-        return this.selectedAmount < 0 ? true: this.selectedAmount === el.amount
-      }, this).filter(function(el) {
         return this.selectedCategory < 0 ? true: this.selectedCategory === el.food_category.id
       }, this).filter(function(el) {
-        return this.selectedToBuy == 0 ? true : el.to_buy
+        return this.onlyToBuy == 0 ? true : el.to_buy
+      }, this).filter(function(el) {
+        return this.onlyNotEmpty == 0 ? true : el.amount != 0
       }, this)
       if (searchQuery) {
         foods = foods.filter(function (row) {
