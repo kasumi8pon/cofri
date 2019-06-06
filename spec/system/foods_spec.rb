@@ -9,8 +9,9 @@ RSpec.describe "Foods", type: :system do
     category1 = FactoryBot.create(:food_category, user_group: user_group)
     category2 = FactoryBot.create(:food_category, user_group: user_group)
     @enough_food = FactoryBot.create(:food, amount: "enough", user_group: user_group, food_category: category1)
-    @empty_food = FactoryBot.create(:food, amount: "empty", user_group: user_group, food_category: category1)
+    @empty_food = FactoryBot.create(:food, amount: "empty", user_group: user_group, food_category: category1, to_buy: true)
     @other_category_food = FactoryBot.create(:food, user_group: user_group, food_category: category2, amount: "short")
+    
     log_in_as(user)
     click_link "冷蔵庫のなかみ"
   end
@@ -48,10 +49,16 @@ RSpec.describe "Foods", type: :system do
     expect(page).to have_selector "button.is-primary", text: "short"
   end
 
-  it "食材の量でフィルターできること" do
-    choose "enough"
+  it "残量がある食材のみ表示できること" do
+    check "残量があるもののみ"
     expect(page).to have_content @enough_food.name
     expect(page).not_to have_content @empty_food.name
+  end
+
+  it "買うものチェックがついている食材のみ表示ができること" do
+    check "買うもののみ"
+    expect(page).to have_content @empty_food.name
+    expect(page).not_to have_content @enough_food.name
   end
 
   it "食材のカテゴリーでフィルターできること" do
