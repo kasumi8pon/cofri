@@ -34,7 +34,7 @@
             </a>
           </div>
           <div class="buttons" v-else>
-            <a href="users/new" class="button is-danger">
+            <a href="/users/new" class="button is-danger">
               <strong>ユーザー登録</strong>
             </a>
             <a herf="/login" class="button is-light">
@@ -56,7 +56,7 @@ export default {
   },
   methods: {
     editPath: function(id) {
-      return 'users/'+id+'/edit';
+      return '/users/'+id+'/edit';
     },
   }
 }
