@@ -12,7 +12,7 @@ class Food < ApplicationRecord
     short: 1,
     enough: 2
           }
-  
+
   private
 
     def check_to_buy

@@ -1,3 +1,11 @@
 // Place all the styles related to the food_categories controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@media screen and (min-width: 1024px) {
+  .table.food_category {
+    .name {
+        width: 50%;
+    }
+  }
+}

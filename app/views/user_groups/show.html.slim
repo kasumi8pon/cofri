@@ -5,17 +5,16 @@ div.tabs.is-centered
     li.is-active
       = link_to "グループ情報", user_group_path(@user.user_group)
 
-.section
-  .container
-    .columns.is-centered
-      .column.is-three-quarters
-        h1.title グループ情報
-        - if @group_members.present?
-          p あなたは以下のユーザーとcoFriの情報を共有しています
-          ul
-            - @group_members.each do |member|
-              li= member.name
-        - else
-          p あなたは他のユーザーとcoFriの情報を共有していません
-        .control
-          = link_to "ユーザーを招待する", invitations_path, method: :post, class: "button is-primary"
+.container
+  .columns.is-centered
+    .column.is-three-fifths
+      h1.title グループ情報
+      - if @group_members.present?
+        p あなたは以下のユーザーとcoFriの情報を共有しています
+        ul
+          - @group_members.each do |member|
+            li= member.name
+      - else
+        p あなたは他のユーザーとcoFriの情報を共有していません
+      .control
+        = link_to "ユーザーを招待する", invitations_path, method: :post, class: "button is-primary"

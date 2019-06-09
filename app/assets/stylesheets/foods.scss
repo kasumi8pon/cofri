@@ -1,3 +1,21 @@
 // Place all the styles related to the foods controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.table.food {
+  .to-buy {
+    width: 110px;
+    .button {
+      width: 40px;
+    }
+  }
+  .amount {
+    .button {
+      width: 70px;
+    };
+    .amount-button.is-primary {
+      cursor: default;
+    }
+  }
+}
+

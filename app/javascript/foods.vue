@@ -35,22 +35,30 @@
         </a>
       </div>
     </div>
-    <table class="table is-striped is-fullwidth">
+    <table class="table food is-striped is-fullwidth">
       <thead>
         <tr>
-          <th>買うもの<br>チェック</th>
-          <th>{{ name }}</th>
-          <th>{{ amount }}</th>
           <th>
-            <label for="category">{{ foodCategory }}</label>
-            <br>
-            <select v-model="selectedCategory" class="select" id="category">
-              <option v-for="category in categories" name="category" :value="category.id">
-                {{ category.name }}
-              </option>
-            </select>
+            <p class="has-text-centered">買うもの<br>チェック</p>
           </th>
-          <th></th>
+          <th>
+            <p class="has-text-centered">{{ name }}</p>
+          </th>
+          <th>
+            <p class="has-text-centered">{{ amount }}</p>
+          </th>
+          <th>
+            <label for="category">
+              <p class="has-text-centered">
+                {{ foodCategory }}<br>
+                <select v-model="selectedCategory" class="select" id="category">
+                <option v-for="category in categories" name="category" :value="category.id">
+                  {{ category.name }}
+                </option>
+              </select>
+            </p>
+            </label>
+          </th>
           <th></th>
         </tr>
       </thead>
@@ -64,16 +72,24 @@
           </td>
           <td>{{ food.name }}</td>
           <td class="amount">
-            <div class="columns">
-              <div v-for="(amount, index) in amountList" class="column">
-                <button class="button is-rounded is-small amount" :class="{'is-primary': food.amount == index }" v-on:click="changeAmount(food.id, index)">
+            <div class="columns is-desktop">
+              <div v-for="(amount, index) in amountList" class="column has-text-centered">
+                <button class="button is-rounded is-small amount-button" :class="{'is-primary': food.amount == index }" v-on:click="changeAmount(food.id, index)">
                   {{ amount.label }}
                 </button>
               </div>
             </div>
           <td>{{food.food_category.name}}</td>
-          <td class="edit"><a :href="path('edit', food.id)" class="button is-small">編集</a></td>
-          <td class="destroy"><a :data-confirm="dataConfirm(food.name)" rel="nofollow" data-method="delete" :href="path('delete', food.id)" class="button is-small is-danger">削除</a></td>
+          <td class="edit-and-delete">
+            <div class="columns">
+              <div class="column">
+                <a :href="path('edit', food.id)" class="button is-small">編集</a>
+              </div>
+              <div class="column">
+                <a :data-confirm="dataConfirm(food.name)" rel="nofollow" data-method="delete" :href="path('delete', food.id)" class="button is-small is-danger">削除</a>
+              </div>
+            </div>
+          </td>
         </tr>
       </tbody>
     </table>
