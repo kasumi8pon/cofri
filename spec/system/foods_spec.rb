@@ -11,7 +11,7 @@ RSpec.describe "Foods", type: :system do
     @enough_food = FactoryBot.create(:food, amount: "enough", user_group: user_group, food_category: category1)
     @empty_food = FactoryBot.create(:food, amount: "empty", user_group: user_group, food_category: category1, to_buy: true)
     @other_category_food = FactoryBot.create(:food, user_group: user_group, food_category: category2, amount: "short")
-    
+
     log_in_as(user)
     click_link "冷蔵庫のなかみ"
   end
