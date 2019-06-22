@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   get "/login", to: "sessions#new"
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
-  root to: "foods#index"
+  root to: "home#index"
+  
   resources :foods, except: :show
   resources :food_categories, except: :show do
     resource :position, only: [:update], controller: "food_categories/position"

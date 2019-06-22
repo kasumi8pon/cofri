@@ -1,0 +1,45 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@media screen and (max-width: 767px) {
+  .columns.home {
+    width: 330px;
+    margin: auto;
+  }
+  .home-icon-image {
+    font-size: 3em;
+  }
+  span.icon {
+    width: 3rem;
+    height: 3rem
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px)  {
+  .columns.home {
+    width: 730px;
+    margin: auto;
+  }
+  .home-descriptions {
+    padding-left: 50px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .columns.home {
+    width: 900px;
+    margin: auto;
+  }
+  .home-descriptions {
+    padding-left: 50px;
+  }
+}
+
+.home-descriptions {
+  padding-bottom: 50px
+}
+// span.icon {
+//   width: 3rem;
+//   height: 3rem
+// }
