@@ -7,5 +7,4 @@
             h1.title 食材を追加
           .level-right
             = link_to "戻る", foods_path, class: "button"
-
         = render partial: "form", locals: { food: @food, currrent_group: @current_group, from: "food_new" }
