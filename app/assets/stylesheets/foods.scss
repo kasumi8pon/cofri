@@ -2,9 +2,60 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.table.food {
+@media screen and (max-width: 767px) {
+  .columns.fridge {
+    width: 330px;
+    margin: auto;
+  }
+  .food {
+    .name.column {
+      order: 1
+    }
+    .to-buy.column {
+      order: 2
+    }
+    .category.column {
+      order: 3
+    }
+    .amount.column {
+      order: 4
+    }
+    .food-list__body {
+      .food-list__column.name {
+        p {
+          padding-left:10px
+        }
+      }
+    }
+    
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px)  {
+  .columns.fridge {
+    width: 730px;
+    margin: auto;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .columns.fridge {
+    width: 900px;
+    margin: auto;
+  }
+}
+
+.food {
+  .food-list__body .food-list__body__item:nth-child(1) {
+    border-top: solid 2px #dbdbdb
+  }
+  .food-list__body .food-list__body__item:not(:nth-child(1)) {
+    border-top: solid 1px #dbdbdb
+  }
+  .food-list__body .food-list__body__item:nth-child(even) {
+    background-color: #fafafa
+  }
   .to-buy {
-    width: 110px;
     .button {
       width: 40px;
     }

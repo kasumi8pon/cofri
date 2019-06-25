@@ -37,7 +37,7 @@
             <a href="/users/new" class="button is-danger">
               <strong>ユーザー登録</strong>
             </a>
-            <a herf="/login" class="button is-light">
+            <a href="/login" class="button is-light">
               ログイン
             </a>
           </div>

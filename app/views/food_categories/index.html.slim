@@ -1,45 +1,40 @@
 .section
   .container
-    .columns.is-centered
-      .column.is-three-quarters
+    .columns.is-centered.is-narrow.categories
+      .column
         .level.is-mobile
           .level-left
             h1.title カテゴリー
           .level-right
             = link_to "カテゴリーを追加", new_food_category_path, class: "button is-primary"
-        table.table.food_category.is-striped.is-fullwidth
-          thead
-            tr
-              th.has-text-centered= FoodCategory.human_attribute_name(:name)
-              th.position
-              th
-          tbody
-            - @food_categories.each do |food_category|
-              tr
-                td.name
-                  = food_category.name
-                td.position
-                  .columns.is-mobile
-                    .column
-                      = link_to food_category_position_path(food_category, move: :top), method: :put, class: "button is-rounded is-small" do
-                        span.icon.is-large
-                          i.fas.fa-angle-double-up
-                    .column
-                      = link_to food_category_position_path(food_category, move: :higher), method: :put, class: "button is-rounded is-small" do
-                        span.icon.is-large
-                          i.fas.fa-angle-up
-                    .column
-                      = link_to food_category_position_path(food_category, move: :lower), method: :put, class: "button is-rounded is-small" do
-                        span.icon.is-large
-                          i.fas.fa-angle-down
-                    .column
-                      = link_to food_category_position_path(food_category, move: :bottom), method: :put, class: "button is-rounded is-small" do
-                        span.icon.is-large
-                          i.fas.fa-angle-double-down
-                        
-                td.edit-and-delete
-                  .columns
-                    .column
-                      = link_to "編集", edit_food_category_path(food_category), class: "button is-small"
-                    .column
-                      = link_to "削除", food_category, method: :delete, data: { confirm: "#{food_category.name}を削除します。よろしいですか？" }, class: "button is-danger is-small"
+        .columns.is-vcentered.is-mobile.food-category__head
+          .column.is-6-mobile.food-category__head__column.has-text-centered= FoodCategory.human_attribute_name(:name)
+          .column.is-6-mobile.food-category__head__column
+          .column.food-category__head__column.is-hidden-mobile
+        .food-category__body
+          - @food_categories.each do |food_category|
+            .columns.is-vcentered.is-mobile.food-category__body__item
+              .column.is-5-desktop.is-5-tablet.is-6-mobile.name
+                = link_to food_category.name, edit_food_category_path(food_category)
+              .column.is-4-desktop.is-4-tablet.is-6-mobile.position
+                .columns.is-mobile.is-variable.is-1-mobile
+                  .column
+                    = link_to food_category_position_path(food_category, move: :top), method: :put, class: "button is-rounded is-small" do
+                      span.icon.is-large
+                        i.fas.fa-angle-double-up
+                  .column
+                    = link_to food_category_position_path(food_category, move: :higher), method: :put, class: "button is-rounded is-small" do
+                      span.icon.is-large
+                        i.fas.fa-angle-up
+                  .column
+                    = link_to food_category_position_path(food_category, move: :lower), method: :put, class: "button is-rounded is-small" do
+                      span.icon.is-large
+                        i.fas.fa-angle-down
+                  .column
+                    = link_to food_category_position_path(food_category, move: :bottom), method: :put, class: "button is-rounded is-small" do
+                      span.icon.is-large
+                        i.fas.fa-angle-double-down    
+              .column.is-3-desktop.is-3-tablet.is-hidden-mobile.actions
+                .buttons.is-centered
+                  = link_to "編集", edit_food_category_path(food_category), class: "button is-small"
+                  = link_to "削除", food_category, method: :delete, data: { confirm: "#{food_category.name}を削除します。よろしいですか？" }, class: "button is-danger is-small"

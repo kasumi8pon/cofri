@@ -62,7 +62,7 @@ RSpec.describe "Foods", type: :system do
   end
 
   it "食材のカテゴリーでフィルターできること" do
-    select @other_category_food.food_category.name, from: "カテゴリー"
+    select @other_category_food.food_category.name, from: "category"
     expect(page).not_to have_content @enough_food.name
     expect(page).not_to have_content @empty_food.name
     expect(page).to have_content @other_category_food.name

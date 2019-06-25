@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="food">
     <div class="columns">
       <div class="column is-three-quarters">
         <div class="field has-addons">
@@ -35,64 +35,59 @@
         </a>
       </div>
     </div>
-    <table class="table food is-striped is-fullwidth">
-      <thead>
-        <tr>
-          <th>
-            <p class="has-text-centered">買うもの<br>チェック</p>
-          </th>
-          <th>
-            <p class="has-text-centered">{{ name }}</p>
-          </th>
-          <th>
-            <p class="has-text-centered">{{ amount }}</p>
-          </th>
-          <th>
-            <label for="category">
-              <p class="has-text-centered">
-                {{ foodCategory }}<br>
-                <select v-model="selectedCategory" class="select" id="category">
-                <option v-for="category in categories" name="category" :value="category.id">
-                  {{ category.name }}
-                </option>
-              </select>
-            </p>
-            </label>
-          </th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="food in computedFoods" :key="food.id">
-          <td class="to-buy">
-            <div class="buttons has-addons">
-              <span class="button is-small" :class="food.to_buy ? 'is-primary' : 'is-state is-light'" @click="changeToBuy(food.id)">ON</span>
-              <span class="button is-small" :class="!food.to_buy ? 'is-primary' : 'is-state is-light'" @click="changeToBuy(food.id)">OFF</span>
+    <br>
+    <br>
+    <div class="columns is-vcentered is-mobile is-multiline food-list__head">
+      <div class="column food-list__column is-2-desktop is-2-tablet is--mobile to-buy">
+        <p class="has-text-centered">買うもの<br>チェック</p>
+      </div>
+      <div class="column food-list__column is-2-desktop is-3-tablet is-8-mobile name">
+        <p class="has-text-centered">{{ name }}</p>
+      </div>
+      <div class="column food-list__column category is-2-desktop is-2-tablet is-hidden-mobile">
+        <p class="has-text-centered">
+          {{ foodCategory }}<br>
+          <select v-model="selectedCategory" class="select" id="category">
+            <option v-for="category in categories" name="category" :value="category.id" :key=category.id>
+              {{ category.name }}
+            </option>
+          </select>
+        </p>
+      </div>
+      <div class="column food-list__column is-4-desktop is-5-tablet is-hidden-mobile is-12-mobile amount">
+      </div>
+      <div class="column food-list__column is-2-desktop actions is-hidden-touch">
+      </div>
+    </div>
+    <div class="food-list__body">
+      <div class="columns is-vcentered is-mobile is-multiline food-list__body__item" v-for="food in computedFoods" :key="food.id">
+        <div class="column is-2-desktop is-2-tablet is-4-mobile to-buy food-list__column">
+          <div class="buttons has-addons is-centered">
+            <span class="button is-small" :class="food.to_buy ? 'is-primary' : 'is-state is-light'" @click="changeToBuy(food.id)">ON</span>
+            <span class="button is-small" :class="!food.to_buy ? 'is-primary' : 'is-state is-light'" @click="changeToBuy(food.id)">OFF</span>
+          </div>
+        </div>
+        <div class="column is-2-desktop is-3-tablet is-8-mobile name food-list__column">
+          <p><a :href="path('edit', food.id)">{{ food.name }}</a></p>
+        </div>
+        <div class="column is-2-desktop is-2-tablet is-hidden-mobile category food-list__column">{{ food.food_category.name }}</div>
+        <div class="column is-4-desktop is-5-tablet is-full-mobile amount food-list__column">
+          <div class="columns is-mobile is-variable is-1-mobile is-3-tablet is-3-desktop">
+            <div v-for="(amount, index) in amountList" class="column has-text-centered" :key="amount.value">
+              <button class="button is-rounded is-small amount-button" :class="{'is-primary': food.amount == index }" v-on:click="changeAmount(food.id, index)">
+                {{ amount.label }}
+              </button>
             </div>
-          </td>
-          <td>{{ food.name }}</td>
-          <td class="amount">
-            <div class="columns is-desktop">
-              <div v-for="(amount, index) in amountList" class="column has-text-centered">
-                <button class="button is-rounded is-small amount-button" :class="{'is-primary': food.amount == index }" v-on:click="changeAmount(food.id, index)">
-                  {{ amount.label }}
-                </button>
-              </div>
-            </div>
-          <td>{{food.food_category.name}}</td>
-          <td class="edit-and-delete">
-            <div class="columns">
-              <div class="column">
-                <a :href="path('edit', food.id)" class="button is-small">編集</a>
-              </div>
-              <div class="column">
-                <a :data-confirm="dataConfirm(food.name)" rel="nofollow" data-method="delete" :href="path('delete', food.id)" class="button is-small is-danger">削除</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+          </div>
+        </div>
+        <div class="column actions is-2-desktop is-hidden-touch food-list__column">
+          <div class="buttons is-centered">
+            <a :href="path('edit', food.id)" class="button is-small">編集</a>
+            <a :data-confirm="dataConfirm(food.name)" rel="nofollow" data-method="delete" :href="path('delete', food.id)" class="button is-small is-danger">削除</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
