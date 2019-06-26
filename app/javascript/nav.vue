@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <a class="navbar-item" :href="titlePath()">
+      <a class="navbar-item" href="/">
         <h1 class="title">coFri</h1>
       </a>
 
@@ -57,10 +57,6 @@ export default {
   methods: {
     editPath: function(id) {
       return '/users/'+id+'/edit';
-    },
-
-    titlePath: function() {
-      return this.currentUserId ? '/foods' : '/'
     }
   }
 }
