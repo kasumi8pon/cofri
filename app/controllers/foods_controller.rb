@@ -1,8 +1,14 @@
 # frozen_string_literal: true
 
 class FoodsController < ApplicationController
+  skip_before_action :login_required, only: :index
+
   def index
-    @foods = current_group.foods
+    if current_user
+      @foods = current_group.foods
+    else
+      render template: "home/index"
+    end
   end
 
   def show
