@@ -24,4 +24,5 @@
     .control
       = f.submit nil, class: "button is-primary"
     .control
-      = link_to "ユーザー削除", user, method: :delete, data: { confirm: "#{user.name}を削除します。よろしいですか？" }, class: "button is-danger"
+      - if destroy
+        = link_to "ユーザー削除", user, method: :delete, data: { confirm: "#{user.name}を削除します。よろしいですか？" }, class: "button is-danger"

@@ -5,4 +5,4 @@
         h1.title カテゴリーの編集
       .column.main-action
         = link_to "戻る", food_categories_path, class: "button"
-    = render partial: "form", locals: { food_category: @food_category }
+    = render partial: "form", locals: { food_category: @food_category, destroy: true }
