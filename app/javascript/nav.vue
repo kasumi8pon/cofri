@@ -18,6 +18,10 @@
           冷蔵庫のなかみ
         </a>
 
+        <a href="/shopping_list" class="navbar-item">
+          買い物リスト
+        </a>
+
         <a href="/food_categories" class="navbar-item">
           カテゴリー
         </a>
