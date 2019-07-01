@@ -2,6 +2,10 @@
   "name": "cofri",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.19",
+    "@fortawesome/free-regular-svg-icons": "^5.9.0",
+    "@fortawesome/free-solid-svg-icons": "^5.9.0",
+    "@fortawesome/vue-fontawesome": "^0.1.6",
     "@rails/webpacker": "^4.0.2",
     "axios": "^0.18.0",
     "bulma": "^0.7.5",
