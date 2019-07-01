@@ -2,71 +2,69 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-@media screen and (max-width: 767px) {
-  .columns.fridge {
-    width: 330px;
-    margin: auto;
-  }
-  .food {
+.foods {
+  @media screen and (max-width: 767px) {
     .name.column {
       order: 1
     }
-    .to-buy.column {
+    .category.column {
       order: 2
     }
-    .category.column {
+    .amount.column {
       order: 3
     }
-    .amount.column {
+    .to-buy.column {
       order: 4
     }
     .food-list__body {
-      .food-list__column.name {
-        p {
-          padding-left:10px
-        }
+      .column.name {
+        padding-top: 20px;
+        padding-bottom: 8px;
+      }
+      .column.amount, .column.to-buy {
+        padding-top: 8px;
+        padding-bottom: 20px
       }
     }
-    
-  }
-}
-
-@media screen and (min-width: 768px) and (max-width: 1023px)  {
-  .columns.fridge {
-    width: 730px;
-    margin: auto;
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  .columns.fridge {
-    width: 900px;
-    margin: auto;
-  }
-}
-
-.food {
-  .food-list__body .food-list__body__item:nth-child(1) {
-    border-top: solid 2px #dbdbdb
-  }
-  .food-list__body .food-list__body__item:not(:nth-child(1)) {
-    border-top: solid 1px #dbdbdb
-  }
-  .food-list__body .food-list__body__item:nth-child(even) {
-    background-color: #fafafa
-  }
-  .to-buy {
-    .button {
-      width: 40px;
+    .to-buy {
+      .button {
+        width: 100%
+      }
     }
   }
+
+  .food__header {
+    margin-top: 1.5em;
+  }
+  .slack {
+    display: flex;
+    justify-content: flex-end
+  }
+  .search {
+    .times {
+      cursor: pointer;
+      pointer-events: initial !important
+    }
+  }
+  .column.to-buy, .column.amount {
+    display: flex;
+    justify-content: center;
+  }
   .amount {
-    .button {
-      width: 70px;
+    .buttons {
+      max-width: 210px;
+      width: 100%;
     };
+    .button {
+      width: 33%
+    }
     .amount-button.is-primary {
       cursor: default;
     }
   }
+  .to-buy{
+    .button {
+      width: 6.5rem
+    }
+  }
 }
-

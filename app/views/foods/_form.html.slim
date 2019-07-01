@@ -18,6 +18,9 @@
       = link_to new_food_category_path(from: from, edit_id: food.id), class: "button is-rounded" do
         span.icon.is-large
           i.fas.fa-plus
-  .field
+  .field.is-grouped
     .control
       = f.submit nil, class: "button is-primary"
+    .control
+      - if destroy
+        = link_to "削除", food, method: :delete, data: { confirm: "#{food.name}を削除します。よろしいですか？" }, class: "button is-danger"

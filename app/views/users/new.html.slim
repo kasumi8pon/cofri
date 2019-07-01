@@ -1,6 +1,4 @@
 .section
-  .container
-    .columns.is-centered
-      .column.is-three-quarters
-        h1.title ユーザー登録
-        = render partial: "form", locals: { user: @user }
+  .container.main
+    h1.title ユーザー登録
+    = render partial: "form", locals: { user: @user, destroy: false }

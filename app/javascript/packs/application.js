@@ -17,4 +17,5 @@
 
 require('../nav.js')
 require('../foods.js')
+require('../shopping-list.js')
 require('../copy.js')

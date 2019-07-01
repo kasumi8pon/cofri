@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
   root to: "foods#index"
+  get "/shopping_list", to: "shopping_items#index"
 
   resources :foods, except: :show
   resources :food_categories, except: :show do
@@ -18,5 +19,6 @@ Rails.application.routes.draw do
   namespace "api" do
     resources :foods, only: [:index, :update]
     resources :food_categories, only: :index
+    resources :shopping_items, only: [:index]
   end
 end

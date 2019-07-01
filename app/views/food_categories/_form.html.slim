@@ -10,7 +10,9 @@
     = f.label :name, class: "label"
     .control
         = f.text_field :name, class: "input"
-  .field
+  .field.is-grouped
     .control
       = f.submit nil, class: "button is-primary"
-  
+    .control
+      - if destroy
+          = link_to "削除", food_category, method: :delete, data: { confirm: "#{food_category.name}を削除します。よろしいですか？" }, class: "button is-danger"
