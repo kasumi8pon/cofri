@@ -10,7 +10,7 @@ RSpec.describe "Foods", type: :system do
     category2 = FactoryBot.create(:food_category, user_group: user_group)
     @enough_food = FactoryBot.create(:food, amount: "enough", user_group: user_group, food_category: category1)
     @empty_food = FactoryBot.create(:food, amount: "empty", user_group: user_group, food_category: category1, to_buy: true)
-    @other_category_food = FactoryBot.create(:food, user_group: user_group, food_category: category2, amount: "short")
+    @other_category_food = FactoryBot.create(:food, user_group: user_group, food_category: category2, amount: "empty")
 
     log_in_as(user)
     click_link "冷蔵庫のなかみ"
@@ -30,35 +30,29 @@ RSpec.describe "Foods", type: :system do
   end
 
   it "食材の情報を編集できること" do
-    click_link "編集", match: :first
+    click_link @enough_food.name
     fill_in "名称", with: "レタス"
-    select "野菜", from: "カテゴリー"
     click_button "更新する"
     expect(page).to have_content("レタスの情報を更新しました")
   end
 
   it "食材を削除できること" do
+    click_link @enough_food.name
     accept_alert do
-      click_link "削除", match: :first
+      click_link "削除"
     end
     expect(page).to have_content("#{@enough_food.name}を冷蔵庫から削除しました")
   end
 
   it "食材一覧から食材の量を変更できること" do
-    click_button "short", match: :first
-    expect(page).to have_selector "button.is-primary", text: "short"
+    page.all(".amount-button", text: "short").first.click
+    expect(page).to have_selector ".button.is-primary", text: "short"
   end
 
-  it "残量がある食材のみ表示できること" do
-    check "残量があるもののみ"
-    expect(page).to have_content @enough_food.name
-    expect(page).not_to have_content @empty_food.name
-  end
-
-  it "買うものチェックがついている食材のみ表示ができること" do
-    check "買うもののみ"
-    expect(page).to have_content @empty_food.name
+  it "量で食材をフィルターできること" do
+    page.all(".amount-checkbox", text: "empty").first.click
     expect(page).not_to have_content @enough_food.name
+    expect(page).to have_content @empty_food.name
   end
 
   it "食材のカテゴリーでフィルターできること" do
@@ -69,7 +63,7 @@ RSpec.describe "Foods", type: :system do
   end
 
   it "食材の名称で検索できること" do
-    fill_in "検索", with: @enough_food.name
+    fill_in "search", with: @enough_food.name
     expect(page).to have_content @enough_food.name
     expect(page).not_to have_content @empty_food.name
   end
