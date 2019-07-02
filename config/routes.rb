@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   delete "/logout", to: "sessions#destroy"
   root to: "foods#index"
   get "/shopping_list", to: "shopping_items#index"
+  get "/disclaimer", to: "home#disclaimer"
 
   resources :foods, except: :show
   resources :food_categories, except: :show do

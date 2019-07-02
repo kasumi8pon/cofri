@@ -5,4 +5,7 @@ class HomeController < ApplicationController
 
   def index
   end
+
+  def disclaimer
+  end
 end
