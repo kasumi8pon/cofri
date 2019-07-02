@@ -1,3 +1,10 @@
+div.tabs.is-centered
+  ul
+    li
+      = link_to "ユーザー情報", edit_user_path(@user)
+    li.is-active
+      = link_to "グループ情報", user_group_path(@user.user_group)
+
 .section
   .container.main
     .columns.is-mobile.is-multiline

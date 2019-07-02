@@ -34,6 +34,7 @@ class InvitationsController < ApplicationController
   def show
     @invitation = Invitation.find(params[:id])
     @user_group = @invitation.user_group
+    @user = current_user
     @invitation.create_digest
   end
 
