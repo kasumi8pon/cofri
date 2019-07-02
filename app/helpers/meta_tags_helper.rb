@@ -3,7 +3,7 @@
 module MetaTagsHelper
   def default_meta_tags
     {
-      site: "coFri",
+      title: "coFri",
       reverse: "true",
       charset: "utf-8",
       description: "複数人が料理をする家庭向けの、 冷蔵庫の中身を管理できるアプリです。",
