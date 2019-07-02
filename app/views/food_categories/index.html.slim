@@ -8,10 +8,10 @@
     .food-category.list__body
       - @food_categories.each do |food_category|
         .columns.is-vcentered.is-centered.is-mobile.list__body__item
-          .column.is-7-desktop.is-7-tablet.is-5-mobile.name.list__body__column
+          .column.is-7-desktop.is-7-tablet.is-4-mobile.name.list__body__column
             = link_to food_category.name, edit_food_category_path(food_category), class:"name"
-          .column.is-5-desktop.is-5-tablet.is-7-mobile.position.list__body__column
-            .columns.is-mobile.is-variable.is-1-mobile
+          .column.is-5-desktop.is-5-tablet.is-8-mobile.position.list__body__column
+            .columns.is-mobile.is-variable.is-0-mobile
               .column
                 = link_to food_category_position_path(food_category, move: :top), method: :put, class: "button is-danger is-rounded is-small" do
                   span.icon.is-large
