@@ -12,7 +12,7 @@ module MetaTagsHelper
         type: "website",
         site_name: "coFri",
         description: :description,
-        image: "https://cofri.herokuapp.com/ogp/ogp.png",
+        image: "https://cofri.herokuapp.com/ogp/cofri.png",
         url: "https://cofri.herokuapp.com",
       },
       twitter: {
