@@ -19,7 +19,7 @@
             </span>
           </div>
         </div>
-        <div class="amount-checkbox columns">
+        <div class="amount-checkbox columns is-mobile">
           <div @click="clickCheck('empty')" class="amount-checkbox column is-narrow">
             <label class="checkbox">
               <span class="icon">
@@ -191,7 +191,7 @@ export default {
       for(var i = 0; i < this.toBuyFoods.length; i++) {
         toBuyFoodsName.push(this.toBuyFoods[i].name);
       };
-      return "http://slackbutton.herokuapp.com/post/new?url=帰りに" + toBuyFoodsName.join('と') + "を買ってきて";
+      return "https://slackbutton.herokuapp.com/post/new?url=帰りに" + toBuyFoodsName.join('と') + "を買ってきて";
     },
 
     postSlack: function() {

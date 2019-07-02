@@ -40,6 +40,7 @@ gem "slim-rails"
 gem "html2slim"
 gem "webpacker", github: "rails/webpacker"
 gem "acts_as_list"
+gem "meta-tags"
 
 group :development, :test do
   gem "sqlite3"
