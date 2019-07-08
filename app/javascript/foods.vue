@@ -1,58 +1,48 @@
 <template>
   <div class="foods-vue">
-    <div class="food__header columns">
-      <div class="column filter">
-        <div class="field has-addons">
-          <div class="control">
-            <div class="select">
-              <select v-model="selectedCategory" id="category">
-                <option v-for="category in categories" name="category" :value="category.id" :key=category.id>
-                  {{ category.name }}
-                </option>
-              </select>
-            </div>
-          </div>
-          <div class="control has-icons-right search">
-            <input id="search" v-model="searchQuery" class="input">
-            <span class="icon is-small is-right" :class="{ times: searchQuery != '' }" @click="deleteSearchQuery">
-              <font-awesome-icon :icon="searchIcon"/>
-            </span>
+    <div class="food__header">
+      <div class="field has-addons">
+        <div class="control">
+          <div class="select">
+            <select v-model="selectedCategory" id="category">
+              <option v-for="category in categories" name="category" :value="category.id" :key=category.id>
+                {{ category.name }}
+              </option>
+            </select>
           </div>
         </div>
-        <div class="amount-checkbox columns is-mobile">
-          <div @click="clickCheck('empty')" class="amount-checkbox column is-narrow">
-            <label class="checkbox">
-              <span class="icon">
-                <font-awesome-icon v-model="selectEmpty" :icon="emptyIcon" />
-              </span>
-              empty
-            </label>
-          </div>
-          <span @click="clickCheck('short')" class="amount-checkbox column is-narrow">
-            <label class="checkbox">
-              <span class="icon">
-                <font-awesome-icon  v-model="selectShort" :icon="shortIcon" />
-              </span>
-              short
-            </label>
-          </span>
-          <span @click="clickCheck('enough')" class="amount-checkbox column is-narrow">
-            <label class="checkbox">
-              <span class="icon">
-                <font-awesome-icon  v-model="selectEnough" :icon="enoughIcon" />
-              </span>
-              enough
-            </label>
+        <div class="control has-icons-right search">
+          <input id="search" v-model="searchQuery" class="input">
+          <span class="icon is-small is-right" :class="{ times: searchQuery != '' }" @click="deleteSearchQuery">
+            <font-awesome-icon :icon="searchIcon"/>
           </span>
         </div>
       </div>
-      <div class="column slack is-hidden-mobile">
-        <a v-on:click="postSlack" class="button" :class="{'is-static': isButtonDisabled }">
-          <span class="icon is-large has-text-primary">
-            <i class="fab fa-slack"></i>
-          </span>
-          <span>買い物を頼む</span>
-        </a>
+      <div class="amount-checkbox columns is-mobile">
+        <div @click="clickCheck('empty')" class="amount-checkbox column is-narrow">
+          <label class="checkbox">
+            <span class="icon">
+              <font-awesome-icon v-model="selectEmpty" :icon="emptyIcon" />
+            </span>
+            empty
+          </label>
+        </div>
+        <span @click="clickCheck('short')" class="amount-checkbox column is-narrow">
+          <label class="checkbox">
+            <span class="icon">
+              <font-awesome-icon  v-model="selectShort" :icon="shortIcon" />
+            </span>
+            short
+          </label>
+        </span>
+        <span @click="clickCheck('enough')" class="amount-checkbox column is-narrow">
+          <label class="checkbox">
+            <span class="icon">
+              <font-awesome-icon  v-model="selectEnough" :icon="enoughIcon" />
+            </span>
+            enough
+          </label>
+        </span>
       </div>
     </div>
     <div v-if="foods.length == 0">
@@ -185,20 +175,6 @@ export default {
     clickCheck: function(amount) {
       const upperAmount = amount.slice( 0, 1 ).toUpperCase() + amount.slice( 1 )
       eval(`this.select${upperAmount} = !this.select${upperAmount}`) 
-    },
-    askUrl: function() {
-      var toBuyFoodsName = []
-      for(var i = 0; i < this.toBuyFoods.length; i++) {
-        toBuyFoodsName.push(this.toBuyFoods[i].name);
-      };
-      return "https://slackbutton.herokuapp.com/post/new?url=帰りに" + toBuyFoodsName.join('と') + "を買ってきて";
-    },
-
-    postSlack: function() {
-      if (this.isButtonDisabled == false) {
-        window.open(this.askUrl(), 'Slackで共有する', 'height=400, width=600');
-      return false;
-      }
     },
     deleteSearchQuery: function () {
       this.searchQuery = ""
