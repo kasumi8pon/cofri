@@ -16,6 +16,7 @@
     </div>
     <div class="column to-buy is-2-desktop is-2-tablet is-narrow food-list__column">
       <span class="button is-small" :class="{'is-danger': !food.to_buy}" @click="changeToBuy">
+        <font-awesome-icon :icon="toBuyIcon" />
         {{ toBuyLabel }}
       </span>
     </div>
@@ -41,7 +42,10 @@
 
   computed: {
     toBuyLabel: function() {
-      return this.food.to_buy ? "−買う物から削除" : "＋買う物に追加"
+      return this.food.to_buy ? "買う物から削除" : "買う物に追加"
+    },
+    toBuyIcon: function() {
+      return this.food.to_buy ? 'minus' : 'plus'
     },
 
     amountList: function() {
