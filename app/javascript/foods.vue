@@ -73,10 +73,7 @@ export default {
       selectEmpty: true,
       selectShort: true,
       selectEnough: true,
-      onlyToBuy: 0,
-      onlyNotEmpty: 0,
-      searchQuery: '',
-      isAllSelected: false
+      searchQuery: ''
     }
   },
 
@@ -128,15 +125,9 @@ export default {
     enoughIcon: function() {
       return this.selectEnough ? 'check-square' : ['far', 'square']
     },
-
     searchIcon: function() {
       return this.searchQuery == "" ? 'search' : 'times-circle'
     },
-
-    amountList: function() {
-      return this.amounts.filter(amount => amount.value >= 0)
-    },
-
     computedFoods: function() {
       var foods = this.foods.filter(function(el) {
         return this.selectedCategory < 0 ? true: this.selectedCategory === el.food_category.id
@@ -157,17 +148,6 @@ export default {
         })
       }
       return foods;
-    },
-
-    isButtonDisabled: function () {
-      return this.toBuyFoods.length == 0 ? true : false
-    },
-
-    toBuyFoods: function() {
-      var foods = this.foods.filter(function(el) {
-        return el.to_buy
-      }, this);
-      return foods
     }
   },
 
