@@ -3,6 +3,15 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .foods {
+  .amount-checkbox.column {
+    position: relative;
+    width: 6.5em;
+    span.amount-label {
+      position: absolute;
+      top: -0.01em;
+      left: 2em;
+    }
+  }
   @media screen and (max-width: 768px) {
     .name.column {
       order: 1

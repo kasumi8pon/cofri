@@ -24,7 +24,7 @@
             <span class="icon">
               <font-awesome-icon v-model="selectEmpty" :icon="emptyIcon" />
             </span>
-            empty
+            <span class="amount-label">empty</span>
           </label>
         </div>
         <span @click="clickCheck('short')" class="amount-checkbox column is-narrow">
@@ -32,7 +32,7 @@
             <span class="icon">
               <font-awesome-icon  v-model="selectShort" :icon="shortIcon" />
             </span>
-            short
+            <span class="amount-label">short</span>
           </label>
         </span>
         <span @click="clickCheck('enough')" class="amount-checkbox column is-narrow">
@@ -40,7 +40,7 @@
             <span class="icon">
               <font-awesome-icon  v-model="selectEnough" :icon="enoughIcon" />
             </span>
-            enough
+            <span class="amount-label">enough</span>
           </label>
         </span>
       </div>
