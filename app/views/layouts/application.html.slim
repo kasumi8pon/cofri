@@ -19,7 +19,7 @@ html
   body
     .hero.is-primary
       .hero-head
-        .container.main
+        .container.nav
           #nav(current-user-id="#{current_user&.id}", edit-user-url="edit_user_url(current_user&.id)")
     - if flash.notice.present?
       .hero.is-light
