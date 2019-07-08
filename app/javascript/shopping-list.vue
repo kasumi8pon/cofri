@@ -1,10 +1,11 @@
 <template>
   <div class="shopping-list-vue">
-    <div class="columns" v-if="this.shoppingList.length != 0">
-      <div class="column">
-      </div>
+    <div class="columns is-mobile">
       <div class="column is-narrow">
-        <a v-on:click="postSlack" class="button is-hidden-mobile">
+        <h1 class="title">買い物リスト</h1>
+      </div>
+      <div class="column main-action is-hidden-mobile" v-if="shoppingList.length != 0">
+        <a v-on:click="postSlack" class="button">
           <span class="icon is-large has-text-primary">
             <i class="fab fa-slack"></i>
           </span>
@@ -12,7 +13,7 @@
         </a>
       </div>
     </div>
-    <div v-else>
+    <div v-if="shoppingList.length == 0">
       <p>
         買いものリストには何もありません。<br>
         冷蔵庫から買うものをリストに追加しましょう。
