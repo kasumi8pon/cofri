@@ -1,12 +1,20 @@
-@media screen and (min-width: 768px) and (max-width: 1023px)  {
+@media screen and (min-width: 769px) and (max-width: 1023px)  {
   .container.main {
     width: 680px;
+    margin: auto;
+  }
+  .container.nav {
+    width: 769px;
     margin: auto;
   }
 }
 @media screen and (min-width: 1024px) {
   .container.main {
     width: 800px;
+    margin: auto;
+  }
+  .container.nav {
+    width: 1024px;
     margin: auto;
   }
 }

@@ -50,9 +50,9 @@ RSpec.describe "Foods", type: :system do
   end
 
   it "量で食材をフィルターできること" do
-    page.all(".amount-checkbox", text: "empty").first.click
-    expect(page).not_to have_content @enough_food.name
-    expect(page).to have_content @empty_food.name
+    find(".amount-label", text: "empty").click
+    expect(page).to have_content @enough_food.name
+    expect(page).not_to have_content @empty_food.name
   end
 
   it "食材のカテゴリーでフィルターできること" do

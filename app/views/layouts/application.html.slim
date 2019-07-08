@@ -19,7 +19,7 @@ html
   body
     .hero.is-primary
       .hero-head
-        .container.main
+        .container.nav
           #nav(current-user-id="#{current_user&.id}", edit-user-url="edit_user_url(current_user&.id)")
     - if flash.notice.present?
       .hero.is-light
@@ -34,5 +34,5 @@ html
           strong coFri
           |  by
           a href="https://github.com/kasumi8pon"  kasumi8pon
-          |  / 
-          = link_to "免責事項", disclaimer_path, class: "is-size-6"
+          br 
+          = link_to "免責事項", disclaimer_path, class: "is-size-7"

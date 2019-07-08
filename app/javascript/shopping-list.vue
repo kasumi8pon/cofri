@@ -1,6 +1,19 @@
 <template>
   <div class="shopping-list-vue">
-    <div v-if="this.shoppingList.length == 0">
+    <div class="columns is-mobile">
+      <div class="column is-narrow">
+        <h1 class="title">買い物リスト</h1>
+      </div>
+      <div class="column main-action is-hidden-mobile" v-if="shoppingList.length != 0">
+        <a v-on:click="postSlack" class="button">
+          <span class="icon is-large has-text-primary">
+            <i class="fab fa-slack"></i>
+          </span>
+          <span>買い物を頼む</span>
+        </a>
+      </div>
+    </div>
+    <div v-if="shoppingList.length == 0">
       <p>
         買いものリストには何もありません。<br>
         冷蔵庫から買うものをリストに追加しましょう。
@@ -27,7 +40,6 @@ export default {
       categories: []
     }
   },
-
   created: function () {
     fetch(`api/shopping_items`, {
         method: 'GET',
@@ -65,13 +77,18 @@ export default {
           console.warn('Failed to parsing', error)
         })
   },
-
-  computed: {
-    
-  },
-
   methods: {
-    
+    askUrl: function() {
+      var shoppingItemsName = []
+      for(var i = 0; i < this.shoppingList.length; i++) {
+        shoppingItemsName.push(this.shoppingList[i].name);
+      };
+      return "https://slackbutton.herokuapp.com/post/new?url=帰りに" + shoppingItemsName.join('と') + "を買ってきて";
+    },
+    postSlack: function() {
+      window.open(this.askUrl(), 'Slackで共有する', 'height=400, width=600');
+      return false;
+    },
   }
 }
 </script>

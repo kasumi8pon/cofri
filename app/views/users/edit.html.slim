@@ -6,6 +6,6 @@ div.tabs.is-centered
       = link_to "グループ情報", user_group_path(@user.user_group)
 
 .section
-  .container.main
-    h1.title ユーザー情報編集
+  .container.main.content
+    h1.title ユーザー情報
     = render partial: "form", locals: { user: @user, destroy: true }
