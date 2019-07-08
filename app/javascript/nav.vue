@@ -4,29 +4,24 @@
       <a class="navbar-item" href="/">
         <h1 class="title">coFri</h1>
       </a>
-
       <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" @click="isOpen = !isOpen" v-bind:class="{'is-active': isOpen}">
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
       </a>
     </div>
-
     <div id="navbarBasicExample" class="navbar-menu" v-bind:class="{'is-active': isOpen}">
       <div class="navbar-start" v-if="currentUserId">
         <a href="/foods" class="navbar-item">
           冷蔵庫のなかみ
         </a>
-
         <a href="/shopping_list" class="navbar-item">
           買い物リスト
         </a>
-
         <a href="/food_categories" class="navbar-item">
           カテゴリー
         </a>
       </div>
-
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons" v-if="currentUserId">

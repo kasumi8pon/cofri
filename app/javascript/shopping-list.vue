@@ -40,7 +40,6 @@ export default {
       categories: []
     }
   },
-
   created: function () {
     fetch(`api/shopping_items`, {
         method: 'GET',
@@ -86,7 +85,6 @@ export default {
       };
       return "https://slackbutton.herokuapp.com/post/new?url=帰りに" + shoppingItemsName.join('と') + "を買ってきて";
     },
-
     postSlack: function() {
       window.open(this.askUrl(), 'Slackで共有する', 'height=400, width=600');
       return false;

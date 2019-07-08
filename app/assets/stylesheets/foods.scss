@@ -3,15 +3,6 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .foods {
-  .amount-checkbox.column {
-    position: relative;
-    width: 6.5em;
-    span.amount-label {
-      position: absolute;
-      top: -0.01em;
-      left: 2em;
-    }
-  }
   @media screen and (max-width: 768px) {
     .name.column {
       order: 1
@@ -41,18 +32,27 @@
       }
     }
   }
-
+  @media screen and (min-width: 769px) {
+    .name.column {
+      padding-left: 20px !important
+    }
+  }
   .food__header {
     margin-top: 1.5em;
-  }
-  .slack {
-    display: flex;
-    justify-content: flex-end
   }
   .search {
     .times {
       cursor: pointer;
       pointer-events: initial !important
+    }
+  }
+  .amount-checkbox.column {
+    position: relative;
+    width: 6.5em;
+    span.amount-label {
+      position: absolute;
+      top: -0.01em;
+      left: 2em;
     }
   }
   .column.to-buy, .column.amount {
