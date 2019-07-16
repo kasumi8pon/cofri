@@ -18,7 +18,7 @@ RSpec.describe "ShoppingItems", type: :system do
 
   it "買う物に追加されていない食材はリストに表示されないこと" do
     click_link "冷蔵庫のなかみ"
-    find("span", text: "−買う物から削除").click
+    find(".to-buy.button").click
     click_link "買い物リスト"
     expect(page).not_to have_content @food.name
   end
