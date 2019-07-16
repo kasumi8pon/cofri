@@ -15,6 +15,6 @@ class FoodCategories::PositionController < ApplicationController
       @food_category.move_to_bottom
     end
 
-    redirect_back fallback_location: root_path
+    redirect_to food_categories_url
   end
 end
