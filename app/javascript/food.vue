@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="column to-buy is-2-desktop is-2-tablet is-narrow food-list__column">
-      <span class="button is-small" :class="{'is-danger': !food.to_buy}" @click="changeToBuy">
+      <span class="button is-small to-buy" :class="{'is-danger': !food.to_buy}" @click="changeToBuy">
         <font-awesome-icon :icon="toBuyIcon" />
         {{ toBuyLabel }}
       </span>
