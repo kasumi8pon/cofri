@@ -5,26 +5,4 @@
         h1.title カテゴリー
       .column.main-action
           = link_to "カテゴリーを追加", new_food_category_path, class: "button is-primary"
-    .food-category.list__body
-      - @food_categories.each do |food_category|
-        .columns.is-vcentered.is-centered.is-mobile.list__body__item
-          .column.is-7-desktop.is-7-tablet.is-4-mobile.name.list__body__column
-            = link_to food_category.name, edit_food_category_path(food_category), class:"name"
-          .column.is-5-desktop.is-5-tablet.is-8-mobile.position.list__body__column
-            .columns.is-mobile.is-variable.is-0-mobile
-              .column
-                = link_to food_category_position_path(food_category, move: :top), method: :put, class: "button is-danger is-rounded is-small" do
-                  span.icon.is-large
-                    i.fas.fa-angle-double-up
-              .column
-                = link_to food_category_position_path(food_category, move: :higher), method: :put, class: "button is-danger is-rounded is-small" do
-                  span.icon.is-large
-                    i.fas.fa-angle-up
-              .column
-                = link_to food_category_position_path(food_category, move: :lower), method: :put, class: "button is-danger is-rounded is-small" do
-                  span.icon.is-large
-                    i.fas.fa-angle-down
-              .column
-                = link_to food_category_position_path(food_category, move: :bottom), method: :put, class: "button is-danger is-rounded is-small" do
-                  span.icon.is-large
-                    i.fas.fa-angle-double-down    
+    #food-categories
