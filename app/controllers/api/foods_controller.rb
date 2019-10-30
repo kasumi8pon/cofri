@@ -3,7 +3,6 @@
 class Api::FoodsController < ApplicationController
   def index
     @foods = current_group.foods.eager_load(:food_category).order("food_categories.position")
-    render "index", formats: "json", handlers: "jbuilder"
   end
 
   def update

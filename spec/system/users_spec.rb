@@ -24,7 +24,7 @@ RSpec.describe "Users", type: :system do
   it "ユーザーの情報を編集できること" do
     user = FactoryBot.create(:user)
     log_in_as(user)
-    visit edit_user_path(user)
+    visit user_path(user)
     fill_in "名前", with: "test"
     click_button "更新する"
     expect(page).to have_content "testの情報を更新しました"
@@ -33,7 +33,7 @@ RSpec.describe "Users", type: :system do
   it "ユーザーを削除できること" do
     user = FactoryBot.create(:user)
     log_in_as(user)
-    visit edit_user_path(user)
+    visit user_path(user)
     accept_alert do
       click_link "ユーザー削除"
     end
