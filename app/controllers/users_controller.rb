@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit
+  def show
     @user = User.find(params[:id])
   end
 
@@ -27,7 +27,7 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       redirect_to foods_url, notice: "#{@user.name}の情報を更新しました"
     else
-      render "edit"
+      render "show"
     end
   end
 

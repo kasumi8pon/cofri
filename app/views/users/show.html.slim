@@ -1,7 +1,7 @@
 div.tabs.is-centered
   ul
     li.is-active
-      = link_to "ユーザー情報", edit_user_path(@user)
+      = link_to "ユーザー情報", user_path(@user)
     li
       = link_to "グループ情報", user_group_path(@user.user_group)
 

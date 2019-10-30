@@ -25,7 +25,7 @@
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons" v-if="currentUserId">
-            <a :href="editPath(currentUserId)" class="button is-primary">
+            <a :href="showPath(currentUserId)" class="button is-primary">
               <strong>ユーザー情報</strong>
             </a>
             <a href="/logout" class="button is-light" rel="nofollow" data-method="delete">
@@ -54,8 +54,8 @@ export default {
     }
   },
   methods: {
-    editPath: function(id) {
-      return '/users/'+id+'/edit';
+    showPath: function(id) {
+      return '/users/'+id;
     }
   }
 }
