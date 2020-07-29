@@ -12,11 +12,14 @@
 
 ActiveRecord::Schema.define(version: 2019_10_30_065454) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "food_categories", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_group_id"
+    t.bigint "user_group_id"
     t.integer "position"
     t.index ["user_group_id"], name: "index_food_categories_on_user_group_id"
   end
@@ -26,8 +29,8 @@ ActiveRecord::Schema.define(version: 2019_10_30_065454) do
     t.integer "amount", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "food_category_id"
-    t.integer "user_group_id"
+    t.bigint "food_category_id"
+    t.bigint "user_group_id"
     t.boolean "to_buy", default: false
     t.index ["food_category_id"], name: "index_foods_on_food_category_id"
     t.index ["user_group_id"], name: "index_foods_on_user_group_id"
@@ -36,7 +39,7 @@ ActiveRecord::Schema.define(version: 2019_10_30_065454) do
   create_table "invitations", force: :cascade do |t|
     t.string "invitation_digest"
     t.boolean "sign_up", default: false
-    t.integer "user_group_id"
+    t.bigint "user_group_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_group_id"], name: "index_invitations_on_user_group_id"
@@ -53,10 +56,14 @@ ActiveRecord::Schema.define(version: 2019_10_30_065454) do
     t.string "password_digest", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_group_id"
+    t.bigint "user_group_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["user_group_id"], name: "index_users_on_user_group_id"
   end
 
+  add_foreign_key "food_categories", "user_groups"
+  add_foreign_key "foods", "food_categories"
+  add_foreign_key "foods", "user_groups"
   add_foreign_key "invitations", "user_groups"
+  add_foreign_key "users", "user_groups"
 end
