@@ -13,5 +13,10 @@ module Types
     def test_field
       "Hello World!"
     end
+
+    field :food_categories, [Types::FoodCategoryType], null: false
+    def food_categories
+      context[:current_user].user_group.food_categories
+    end
   end
 end
