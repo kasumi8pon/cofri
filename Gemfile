@@ -32,6 +32,7 @@ gem "slim-rails"
 gem "html2slim"
 gem "acts_as_list"
 gem "meta-tags"
+gem "graphql"
 
 group :development, :test do
   gem "sqlite3"
@@ -51,6 +52,7 @@ group :development do
   gem "spring"
   gem "spring-watcher-listen"
   gem "spring-commands-rspec"
+  gem "graphiql-rails"
 end
 
 group :test do
