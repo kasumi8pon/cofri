@@ -34,19 +34,20 @@ export default {
     },
 
     getFoodCategories: function() {
-      fetch(`api/food_categories`, {
-        method: 'GET',
+      fetch('/graphql', {
+        method: 'POST',
         headers: {
-          'X-Requested-With': 'XMLHttpRequest',
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'X-CSRF-Token': this.token()
         },
-        credentials: 'same-origin',
-        redirect: 'manual'
+        body: JSON.stringify(
+          {query: "{ foodCategories { id name position} }"}
+        )
       })
-        .then(response => {
-          return response.json()
-        })
+        .then(r => r.json())
         .then(json => {
-          json.forEach(category => { this.foodCategories.push(category) });
+          json.data.foodCategories.forEach(category => { this.foodCategories.push(category) });
         })
         .catch(error => {
           console.warn('Failed to parsing', error)
